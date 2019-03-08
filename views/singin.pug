@@ -1,0 +1,27 @@
+extends mainlayout
+block header
+    link(rel="stylesheet" href="./css/login.css")
+block content
+    div(class="container")
+        div(id="login-row" class="row justify-content-center align-items-center")
+            div(id="login-column" class="col-md-6")
+                div(class="box")
+                    div(class="shape1")
+                    div(class="shape2")
+                    div(class="shape3")
+                    div(class="shape4")
+                    div(class="shape5")
+                    div(class="shape6")
+                    div(class="float")
+                        form(class="form" action="")
+                            div(class="form-group" class="text-white")
+                                label(for="idmedico" class="text-white") Identificacion Medico(Requerido):
+                                input(type="text" name="IdMedico" class="form-control" id="input-idmedico")
+                            div(class="form-group" class="text-white")
+                                label(for="pregunta" class="text-white") Pregunta Recuperacion(Requerido): 
+                                input(type="text" name="pregunta" class="form-control" id="input-pregunta")
+                            div(class="form-group" class="text-white")
+                                label(for="rol" class="text-white") Tipo Rol(Requerido):
+                                select(class="form-control" id="select-rol")
+                                    option(value="usuario" selected) Medico Usuario
+                                    option(value="administador") Administador

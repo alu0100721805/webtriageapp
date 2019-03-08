@@ -1,0 +1,6 @@
+.navbar-light{
+  background: linear-gradient(to bottom, #009933 55%, #006600 105%);
+}
+.navbar-light > a {
+    color : white;
+}

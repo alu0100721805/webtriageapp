@@ -1,0 +1,49 @@
+#google-map{
+    height: 400px;
+    width: 100%;
+    margin: 3% auto;
+    padding-right: 3%;
+}
+
+.btn-group-vertical{
+    margin-top: 38px;
+    float: right;
+    padding-right: 20px;
+    
+}
+
+.btn-group-vertical .custom-control-label {
+  color: #2c2b2c;
+  font-size: 10px;
+  line-height: 2.7;
+  padding-left: 1%;
+  font-style: italic;
+  font-family: serif;
+  font-style: oblique;
+}
+.btn-group-vertical .custom-control-label::after,
+.btn-group-vertical .custom-control-label::before {
+  height: 15px;
+  width: 15px;
+}
+.btn-group-vertical .custom-control-label::before {
+  background-color: #fff;
+  border: 1px solid #2c2b2c;
+  border-radius: 50%;
+}
+
+.custom-control-input:checked ~ .custom-control-label[for="high-priority-input"]::before {
+  background-color: red !important;
+}
+.custom-control-input:checked ~ .custom-control-label[for="low-priority-input"]::before {
+  background-color: green !important;
+}
+.custom-control-input:checked ~ .custom-control-label[for="medium-priority-input"]::before {
+  background-color: yellow !important;
+}
+.custom-control-input:checked ~ .custom-control-label[for="assisted-input"]::before {
+  background-color: blue !important;
+}
+.custom-control-input:checked ~ .custom-control-label[for="not-priority-input"]::before {
+  background-color: black !important;
+}
