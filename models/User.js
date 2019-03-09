@@ -5,18 +5,28 @@ var userSchema = new Schema({
     idmedico: {
         type:String,
         require:true,
-        unique:true},
+        unique:true,
+        validate: {
+            validator: function(v) {
+            return /[0-5][0-9]\d{7}/.test(v);}
+        }
+    },
     password: {
         type:String,
         require:true
     },
-    pregunta: {
+    signkey: {
         type:String,
-        require:true},
+    },
+    answer: {
+        type:String,
+        require:true
+    },
     rol: {
         type:String,
-        enum:['administrador','usuario'], default:'user'},
-        password:{type:String,required:true}
+        enum:['administrador','usuario'], 
+        default:'usuario'
+    }
 });
 
 var User = mongoose.model('User', userSchema);
