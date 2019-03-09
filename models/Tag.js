@@ -17,7 +17,7 @@ var tagschema = new Schema({
   idmedico: 
         {type: String,
         default: ""},
-  created: 
+  fechaalta: 
         {type: Date,
         default: Date.now }
 });

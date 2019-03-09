@@ -11,14 +11,14 @@ var userSchema = new Schema({
             return /[0-5][0-9]\d{7}/.test(v);}
         }
     },
-    password: {
+    constraseña: {
         type:String,
         require:true
     },
-    signkey: {
+    firma: {
         type:String,
     },
-    answer: {
+    pregunta: {
         type:String,
         require:true
     },
