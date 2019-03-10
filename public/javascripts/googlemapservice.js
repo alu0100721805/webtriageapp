@@ -10,8 +10,8 @@ var icons = {"Rojo" : url +'/images/mark-red.png',
              "Verde" : url +'/images/mark-green.png',
              "Negro" : url +'/images/mark-black.png',
              "Azul" : url +'/images/mark-blue.png'};
-var infoWindow = new google.maps.InfoWindow;
-var markerMedicPosition = null;
+
+
              
 function httpGetSync(theUrl,callback)
 {

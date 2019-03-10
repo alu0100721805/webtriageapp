@@ -27,9 +27,10 @@ const prod = {
         name: 'triagestartdb'
     }
 };
-
-const config = {
-    dev,
-    prod
-};
-module.exports = config[env];
+var config;
+if(env=="prod"){
+    config = prod;
+}else {
+    config = dev;
+}
+module.exports = config;

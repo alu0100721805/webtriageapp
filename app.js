@@ -16,7 +16,7 @@ app.use('/', express.static(__dirname + '/public'));
 app.use('/tag', express.static(__dirname + '/public'));
 app.use('/user', express.static(__dirname + '/public'));
 
-const connectionString = `mongodb://${config.db.host}:${config.db.port}/${config.db.name}`;
+const connectionString = "mongodb://"+config.db.host+":"+ config.db.port+"/"+config.db.name;
 
 var gracefulExit = function() {
     mongoose.connection.close(function() {
