@@ -1,6 +1,8 @@
 var User = require("../models/User");
 
-exports.user_login_get = function(req,res){
-  res.render('login');
-  
+exports.index_login = function(req, res) {
+    res.render('login');
+}
+exports.index_registro = function(req, res) {
+    res.render('signup');
 }

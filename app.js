@@ -10,13 +10,10 @@ var express = require('express'),
 app.set('views', './views')
 app.set('view engine', 'pug');
 app.use(logger('dev'));
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-app.use('/', express.static(__dirname + '/public'));
-app.use('/tag', express.static(__dirname + '/public'));
-app.use('/user', express.static(__dirname + '/public'));
+app.use(bodyParser.json({ 'strict': true }));
+app.use('/static', express.static(__dirname + '/public'));
 
-const connectionString = "mongodb://"+config.db.host+":"+ config.db.port+"/"+config.db.name;
+const connectionString = "mongodb://" + config.db.host + ":" + config.db.port + "/" + config.db.name;
 
 var gracefulExit = function() {
     mongoose.connection.close(function() {
@@ -40,17 +37,11 @@ mongoose.connect(connectionString, { useMongoClient: true }, function(err, db) {
     if (err) {
         console.log('Lo sentimos, no se esta ejecutando el servidor de mongodb .');
     } else {
-        //Una vez conectado al servidor , se proceden a registrar las rutas con los controladores oportunes
 
-        app.use("/", router);
-        app.use("/tag", tagrouter);
-        app.use("/user", userrouter);
-        app.use("/MapManagement", function(req, res, next) {
-            res.redirect("/tag/");
-        })
-        app.use("/login", function(req, res, next) {
-            res.redirect("/user/login");
-        })
+
+        //Una vez conectado al servidor , se proceden a registrar las rutas con los controladores oportunes
+        app.use("/Mapa", tagrouter);
+        app.use("/Acceso", userrouter);
         app.listen(config.app.port, config.app.ip, function(err) {
             if (err) throw err;
             console.log("Servidor escuchando en el puerto:" + config.app.port + " en la dirección:" + config.app.ip);

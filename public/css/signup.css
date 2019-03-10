@@ -79,22 +79,3 @@
     margin-left: -160px;
     margin-top: 100px;
 }
-
-.float {
-    position: absolute;
-    z-index: 2;
-    margin-top: 10px;
-    margin-left: 20px;
-}
-
-#titulo-login {
-    margin-top: 25px;
-}
-
-.btn-warning {
-    border-radius: 10px;
-}
-
-#btn-registrase {
-    margin-left: 5px;
-}

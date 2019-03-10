@@ -6,7 +6,7 @@ if (env === undefined) {
 console.log("Entorno :=" + env);
 const dev = {
     app: {
-        ip: "127.0.0.1",
+        ip: "localhost",
         port: 3000
     },
     db: {
@@ -28,9 +28,9 @@ const prod = {
     }
 };
 var config;
-if(env=="prod"){
+if (env == "prod") {
     config = prod;
-}else {
+} else {
     config = dev;
 }
 module.exports = config;
