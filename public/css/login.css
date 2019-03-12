@@ -93,8 +93,20 @@
 
 .btn-warning {
     border-radius: 10px;
+    color: white;
+   
 }
-
-#btn-registrase {
-    margin-left: 5px;
+ #btn-acceder:hover { 
+     color: white; 
+     text-decoration: underline; 
+     font-weight: bolder;
+ }
+ #btn-acceder:active {
+     color: white; 
+     font-weight: bolder;
+ }
+#link-registrase {
+       margin-left: 5px;
+       font-weight: lighter;
+       color: white;
 }

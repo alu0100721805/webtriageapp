@@ -40,8 +40,9 @@ mongoose.connect(connectionString, { useMongoClient: true }, function(err, db) {
 
 
         //Una vez conectado al servidor , se proceden a registrar las rutas con los controladores oportunes
-        app.use("/Mapa", tagrouter);
-        app.use("/Acceso", userrouter);
+        app.use("/map", tagrouter);
+        app.use("/login", userrouter);
+        app.use("/signup", userrouter);
         app.listen(config.app.port, config.app.ip, function(err) {
             if (err) throw err;
             console.log("Servidor escuchando en el puerto:" + config.app.port + " en la dirección:" + config.app.ip);
