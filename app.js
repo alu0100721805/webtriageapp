@@ -6,12 +6,29 @@ var express = require('express'),
     tagrouter = require('./router/TagRouter'),
     userrouter = require('./router/UserRouter'),
     app = express(),
-    router = express.Router();
+    router = express.Router(),
+    expressSession = require('express-sesion'),
+    User =  require("./models/User");
+    passport = require('passport');
+    
 app.set('views', './views')
 app.set('view engine', 'pug');
-app.use(logger('dev'));
+app.use(expressSession({secret: config.app.secret}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(logger(process.env.NODE_ENV === undefined?process.env.NODE_ENV:'dev'));
 app.use(bodyParser.json({ 'strict': true }));
 app.use('/static', express.static(__dirname + '/public'));
+
+// Se configura el modelo de datos que utilizará el passport
+passport.serializeUser(function(user,done){
+    done(null,user.idmedico);
+});
+passport.deserializeUser(function(id,done){
+   User.findById(id,function(err,user){
+       done(err,user);
+   });
+});
 
 const connectionString = "mongodb://" + config.db.host + ":" + config.db.port + "/" + config.db.name;
 

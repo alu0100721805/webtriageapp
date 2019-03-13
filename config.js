@@ -4,22 +4,26 @@ if (env === undefined) {
     env = "prod";
 }
 console.log("Entorno :=" + env);
+
 const dev = {
     app: {
         ip: "localhost",
-        port: 3000
+        port: 3000,
+        secret: "esunsecreto"
     },
     db: {
         host: 'localhost',
         port: 27017,
         name: 'triagestartdb'
     }
+    
 };
 
 const prod = {
     app: {
         ip: process.env.IP,
-        port: process.env.PORT
+        port: process.env.PORT,
+        secret: "esunsecreto"
     },
     db: {
         host: process.env.IP,
