@@ -1,37 +1,25 @@
 var express = require('express'),
     config = require('./config'),
-    logger = require('morgan'),
     mongoose = require('mongoose'),
     bodyParser = require('body-parser'),
     tagrouter = require('./router/TagRouter'),
     userrouter = require('./router/UserRouter'),
-    app = express(),
-    router = express.Router(),
-    expressSession = require('express-sesion'),
-    User =  require("./models/User");
-    passport = require('passport');
-    
+    app = express();
+
 app.set('views', './views')
 app.set('view engine', 'pug');
-app.use(expressSession({secret: config.app.secret}));
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(logger(process.env.NODE_ENV === undefined?process.env.NODE_ENV:'dev'));
 app.use(bodyParser.json({ 'strict': true }));
 app.use('/static', express.static(__dirname + '/public'));
 
-// Se configura el modelo de datos que utilizará el passport
-passport.serializeUser(function(user,done){
-    done(null,user.idmedico);
-});
-passport.deserializeUser(function(id,done){
-   User.findById(id,function(err,user){
-       done(err,user);
-   });
-});
-
 const connectionString = "mongodb://" + config.db.host + ":" + config.db.port + "/" + config.db.name;
-
+const  options = {
+        useMongoClient : true,
+        autoIndex: false,
+        reconnectTries: Number.MAX_VALUE, 
+        reconnectInterval: 2000, 
+        poolSize: 10, 
+        bufferMaxEntries: 0
+};
 var gracefulExit = function() {
     mongoose.connection.close(function() {
         console.log('Se cierra la conexión de la base de datos dado que se ha terminado el proceso');
@@ -39,47 +27,28 @@ var gracefulExit = function() {
     });
 }
 
+// Si se mata el proceso de node entonces se desconecta de la base de datos
+process.on('SIGINT', gracefulExit).on('SIGTERM', gracefulExit);
+
+//Eventos de conexión a la base de datos
+mongoose.connection.on('connected', function() {
+    console.log('Conectado a ' + connectionString);
+        app.use("/map", tagrouter);
+        app.use("/login", userrouter);
+        app.use("/signup", userrouter);
+        app.listen(config.app.port, config.app.ip, function(err) {
+          if (err) throw err;
+          console.log("Servidor escuchando en el puerto:" + config.app.port + " en la dirección:" + config.app.ip);
+})});
 mongoose.connection.on('error', function(err) {
     console.log('Error de conexión: ' + err);
 });
 mongoose.connection.on('disconnected', function() {
     console.log('¡Se ha desconectado de la base de datos!');
-
 }, gracefulExit);
 
-// Si se mata el proceso de node entonces se desconecta de la base de datos
-process.on('SIGINT', gracefulExit).on('SIGTERM', gracefulExit);
-mongoose.connect(connectionString, { useMongoClient: true }, function(err, db) {
-
-    if (err) {
-        console.log('Lo sentimos, no se esta ejecutando el servidor de mongodb .');
-    } else {
+ mongoose.connect(connectionString, options);
 
 
-        //Una vez conectado al servidor , se proceden a registrar las rutas con los controladores oportunes
-        app.use("/map", tagrouter);
-        app.use("/login", userrouter);
-        app.use("/signup", userrouter);
-        app.listen(config.app.port, config.app.ip, function(err) {
-            if (err) throw err;
-            console.log("Servidor escuchando en el puerto:" + config.app.port + " en la dirección:" + config.app.ip);
-        });
-    }
-});
-
-
-//Eventos de conexión a la base de datos
-mongoose.connection.on('connected', function() {
-    console.log('Conectado a ' + connectionString);
-});
-app.use(function(err, req, res, next) {
-    // set locals, only providing error in development
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'dev' ? err : {};
-
-    // render the error page
-    res.status(err.status || 500);
-    res.render('error');
-});
 
 module.exports = app;
