@@ -22,6 +22,7 @@ module.exports = function(passport){
                     if (user) {
                         console.log('El médico ya existe : '+idmedico);
                         return done(null, false,{message:'El médico ya existe : '+idmedico});
+
                     } else {
                     r
                         var medic = new User();
@@ -39,6 +40,7 @@ module.exports = function(passport){
                             }
                             console.log('Nuevo médico creado');    
                             return done(null, medic,{message:' Colegiado Registrado !'});
+
                         });
                     }
                 });

@@ -21,6 +21,7 @@ module.exports = function(passport){
                         return done(null, false); 
                     }  
                     return done(null, user,{message: ' Acceso autorizado'});
+
                 }
             );
 
