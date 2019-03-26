@@ -3,9 +3,10 @@ const express = require('express'),
     mongoose = require('mongoose'),
     bodyParser = require('body-parser'),
     cors = require('cors'),
-    tagrouter = require('./router/TagRouter'),
-    userrouter = require('./router/UserRouter'),
-    config = require('./config');
+    passport = require('passport'),
+    expressSession = require('express-session');
+    config = require('./config'),
+
 mongoose.promise = global.Promise;
 app.set('views', './views')
 app.set('view engine', 'pug');
@@ -13,6 +14,16 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({ 'strict': true }));
 app.use('/static', express.static(__dirname + '/public'));
+app.use(expressSession({secret: 'webtriagestart'}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Initialize Passport
+var initPassport = require('./passport/init');
+initPassport(passport);
+
+var routes = require('./router/UserRouter')(passport);
+
 
 //is Production ?
 const isProduction = process.env.NODE_ENV === 'production';
@@ -33,14 +44,12 @@ const  options = {
 
 // EVENTS 
 
-// If we kill the process then down bbdd conections
+// Si se mata el proceso se cierra la base de datos
 process.on('SIGINT', gracefulExit).on('SIGTERM', gracefulExit);
 //Eventos de conexión a la base de datos
 mongoose.connection.on('connected', function() {
+    app.use('/', routes);
     console.log('Conectado a ' + connectionString);
-        app.use("/map", tagrouter);
-        app.use("/login", userrouter);
-        app.use("/signup", userrouter);
         app.listen(config.app.port, config.app.ip, function(err) {
           if (err) throw err;
           console.log("Servidor escuchando en el puerto:" + config.app.port + " en la dirección:" + config.app.ip);
@@ -52,12 +61,11 @@ mongoose.connection.on('disconnected', function() {
     console.log('¡Se ha desconectado de la base de datos!');
 }, gracefulExit);
 
-
-
- // CONECTED OR NOT 
+ // Conectar con Moongose
  mongoose.connect(connectionString, options);
 
-//Error handlers & middlewares
+
+//Manejadores de errores y midlewares
 if(!isProduction) {
     app.use((err, req, res) => {
       res.status(err.status || 500);
@@ -80,7 +88,7 @@ if(!isProduction) {
     });
   });
 
- // Utils
+ // Utilidades
  var gracefulExit = function() {
     mongoose.connection.close(function() {
         console.log('Se cierra la conexión de la base de datos dado que se ha terminado el proceso');
