@@ -4,11 +4,12 @@ const express = require('express'),
     bodyParser = require('body-parser'),
     cors = require('cors'),
     passport = require('passport'),
-    expressSession = require('express-session');
+    expressSession = require('express-session'),
     config = require('./config'),
+    app = express();
 
 mongoose.promise = global.Promise;
-app.set('views', './views')
+app.set('views', './views');
 app.set('view engine', 'pug');
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));

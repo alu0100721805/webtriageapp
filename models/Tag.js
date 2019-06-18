@@ -22,5 +22,4 @@ var tagschema = new Schema({
         default: Date.now }
 });
 
-var Tag = mongoose.model('Tag', tagschema);
-module.exports = Tag;
+module.exports  = mongoose.model('Tag', tagschema);
