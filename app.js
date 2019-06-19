@@ -5,7 +5,7 @@ const express = require('express'),
     cors = require('cors'),
     passport = require('passport'),
     expressSession = require('express-session'),
-    config = require('./config'),
+    config = require('./config/config'),
     app = express();
 
 mongoose.promise = global.Promise;
@@ -15,16 +15,17 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({ 'strict': true }));
 app.use('/static', express.static(__dirname + '/public'));
-app.use(expressSession({secret: 'webtriagestart'}));
+app.use(expressSession(
+  { secret: 'webtriagestart',
+    resave: true,
+    saveUninitialized: true
+  }
+));
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Initialize Passport
-var initPassport = require('./passport/init');
-initPassport(passport);
 
-var routes = require('./router/UserRouter')(passport);
-
+let routes = require('./router/UserRouter')(passport);
 
 //is Production ?
 const isProduction = process.env.NODE_ENV === 'production';
@@ -42,6 +43,14 @@ const  options = {
         poolSize: 10, 
         bufferMaxEntries: 0
 };
+
+ // Utilidades
+ let gracefulExit = function() {
+  mongoose.connection.close(function() {
+      console.log('Se cierra la conexión de la base de datos dado que se ha terminado el proceso');
+      process.exit(0);
+  });
+}
 
 // EVENTS 
 
@@ -89,11 +98,5 @@ if(!isProduction) {
     });
   });
 
- // Utilidades
- var gracefulExit = function() {
-    mongoose.connection.close(function() {
-        console.log('Se cierra la conexión de la base de datos dado que se ha terminado el proceso');
-        process.exit(0);
-    });
-}
+
 module.exports = app;

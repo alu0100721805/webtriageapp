@@ -23,5 +23,16 @@
     "pug": "~2.0.0-beta11",
     "serve-favicon": "~2.4.2",
     "underscore": "^1.9.1"
+  },
+  "nodemonConfig": {
+    "restartable": "rs",
+    "ignore": [
+    "node_modules/**/node_modules"
+    ],
+    "delay": "1000",
+    "env": {
+      "NODE_ENV": "development",
+      "NODE_CONFIG_DIR": "./config"
+    }
   }
 }

@@ -1,11 +1,13 @@
 // config.js
 env = process.env.NODE_ENV; // 'dev' or 'prod'
+let config;
 if (env === undefined) {
     env = "prod";
 }
 console.log("Entorno :=" + env);
 
 const dev = {
+    self: this,
     app: {
         ip: "localhost",
         port: 3000,
@@ -16,10 +18,11 @@ const dev = {
         port: 27017,
         name: 'triagestartdb'
     }
-    
+
 };
 
 const prod = {
+    self: this,
     app: {
         ip: process.env.IP,
         port: process.env.PORT,
@@ -31,8 +34,8 @@ const prod = {
         name: 'triagestartdb'
     }
 };
-var config;
-if (env == "prod") {
+
+if (env == "production") {
     config = prod;
 } else {
     config = dev;
