@@ -25,9 +25,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-let routes = require('./router/UserRouter')(passport);
+let router = require('./router/routes');
 
-//is Production ?
+
 const isProduction = process.env.NODE_ENV === 'production';
 
 if(!isProduction) {
@@ -58,7 +58,7 @@ const  options = {
 process.on('SIGINT', gracefulExit).on('SIGTERM', gracefulExit);
 //Eventos de conexión a la base de datos
 mongoose.connection.on('connected', function() {
-    app.use('/', routes);
+  app.use('/', router);
     console.log('Conectado a ' + connectionString);
         app.listen(config.app.port, config.app.ip, function(err) {
           if (err) throw err;
@@ -74,29 +74,6 @@ mongoose.connection.on('disconnected', function() {
  // Conectar con Moongose
  mongoose.connect(connectionString, options);
 
-
-//Manejadores de errores y midlewares
-if(!isProduction) {
-    app.use((err, req, res) => {
-      res.status(err.status || 500);
-  
-      res.json({
-        errors: {
-          message: err.message,
-          error: err,
-        },
-      });
-    });
-  }
-  app.use((err, req, res) => {
-    res.status(err.status || 500);
-    res.json({
-      errors: {
-        message: err.message,
-        error: {},
-      },
-    });
-  });
 
 
 module.exports = app;

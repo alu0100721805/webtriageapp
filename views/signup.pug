@@ -7,20 +7,23 @@ block content
             div(id="signup-column" class="col-md-6")
                 div(class="box")
                         p(id="titulo-signup" class="h4 mb-4 text-white") Registro WebTriageStartApp
-                        form(class="form" action="")
+                         form(method='POST' action='/signup')
                             div(class="form-group" class="text-white")
-                                label(for="idmedico" class="text-white") Médico:
-                                input(type="text" name="idMedico" class="form-control" id="idmedico"  placeholder="Identificación del Medico")
+                                label(for="id" class="text-white") Número Colegiado:
+                                input(type="text" name="id" class="form-control" id="id"  placeholder="Identificación del Medico")
                             div(class="form-group" class="text-white")
-                                label(for="idrespuesta" class="text-white") Respuesta Recuperación:
-                                input(type="text" name="respuesta" class="form-control" id="idrespuesta"  placeholder="Palabra de recuperación de cuenta")
+                                label(for="answer" class="text-white") Respuesta Recuperación:
+                                input(type="text" name="answer" class="form-control" id="answer"  placeholder="Palabra de recuperación de cuenta")
                             div(class="form-group" class="text-white")
-                                label(for="idpassword" class="text-white") Contraseña: 
-                                input(type="password" name="password" class="form-control" id="idpassword" placeholder="Contraseña")
+                                label(for="password" class="text-white") Contraseña: 
+                                input(type="password" name="password" class="form-control" id="password" placeholder="Contraseña")
                             div(class="form-group" class="text-white")
-                                label(for="rolselect" class="text-white") Rol: 
-                                select(id="rolselect" class="form-control")
-                                    option(value="Usuario",selected = true) Usuario
-                                    option(value="Administrador") Administrador
-                            button(id="btn-registrar" class="btn  btn-warning" type="submit") Registrar
+                                label(for="password2" class="text-white") Repetir Contraseña: 
+                                input(type="password" name="password2" class="form-control" id="password2" placeholder="Contraseña")
+                            div(class="form-group" class="text-white")
+                                label(for="role" class="text-white") Rol: 
+                                select(id="role" class="form-control")
+                                    option(value="user",selected = true) Usuario
+                                    option(value="admin") Administrador
+                            button(id="btn-signup" class="btn  btn-warning" type="submit") Registrar
                             

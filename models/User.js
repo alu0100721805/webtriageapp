@@ -1,8 +1,7 @@
-let mongoose = require('mongoose');
-let Schema = mongoose.Schema;
-
-let userSchema = new Schema({
-    idmedico: {
+var mongoose = require('mongoose');
+var bcrypt = require('bcrypt');
+var userSchema = mongoose.Schema({
+    userId: {
         type: String,
         require: true,
         unique: true,
@@ -12,22 +11,30 @@ let userSchema = new Schema({
             }
         }
     },
-    constraseña: {
+    password: {
         type: String,
         require: true
     },
-    firma: {
+    sign: {
         type: String,
     },
-    respuesta: {
+    answer: {
         type: String,
         require: true
     },
-    rol: {
+    role: {
         type: String,
-        enum: ['administrador', 'usuario'],
-        default: 'usuario'
+        enum: ['admin', 'user'],
+        default: 'user'
     }
 });
-
-module.exports = mongoose.model('User', userSchema);
+var User  = module.exports = mongoose.model('User', userSchema);
+module.exports.createUser = function(newUser, callback){
+    bcrypt.genSalt(10,function(err,salt){
+        bcrypt.hash(newUser.password, salt , function(err, hash){
+            newUser.password = hash;
+            // IBE SIGN -> TODO:
+            newUser.save(callback);
+        });
+    });
+};

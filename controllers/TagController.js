@@ -5,7 +5,7 @@ exports.index_map_management = function(req, res) {
 }
 
 exports.tag_create_post = function(req, res) {
-    var objTag = new Tag(req.body);
+    let objTag = new Tag(req.body);
     objTag.save(
         function(err) {
             if (err) {
@@ -17,7 +17,7 @@ exports.tag_create_post = function(req, res) {
         });
 }
 exports.tag_findById_post = function(req, res) {
-    var id = req.body.id;
+    let id = req.body.id;
     if (req.body.id) {
         Tag.findOne({ 'id': id }, function(err, obj) {
             if (err) {
@@ -32,7 +32,7 @@ exports.tag_findById_post = function(req, res) {
 
 }
 exports.tag_findById_get = function(req, res, next) {
-    var id = req.query.id;
+    let id = req.query.id;
     if (req.query.id) {
         Tag.findOne({ 'id': id }, function(err, obj) {
             if (err) {
@@ -44,10 +44,10 @@ exports.tag_findById_get = function(req, res, next) {
     } else next();
 
 }
-exports.tag_findByColor_get = function(req, res, next) {
-    var color = req.query.color;
-    if (color) {
-        Tag.find({ "color": color }, function(err, objs) {
+exports.tag_findByColour_get = function(req, res, next) {
+    let colour = req.query.color;
+    if (colour) {
+        Tag.find({ "color": colour }, function(err, objs) {
             if (err) {
                 res.status(500).send(err);
             } else {
@@ -58,6 +58,3 @@ exports.tag_findByColor_get = function(req, res, next) {
 
 }
 
-exports.tag_index_get = function(req, res) {
-    res.render("MapManagement");
-}

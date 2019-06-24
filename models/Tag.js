@@ -5,19 +5,19 @@ var tagschema = new Schema({
        {type: String, 
         unique: true,
         required: true},
-  color: 
+  colour: 
        {type: String,
         required:true},
-  latitud: 
+  lat: 
         {type: Number,
         required: true},
-  longitud: 
+  long: 
         {type: Number,
         required: true},
-  idmedico: 
+  id: 
         {type: String,
         default: ""},
-  fechaalta: 
+  date: 
         {type: Date,
         default: Date.now }
 });

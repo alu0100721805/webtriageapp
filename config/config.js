@@ -25,7 +25,7 @@ const prod = {
     self: this,
     app: {
         ip: process.env.IP,
-        port: process.env.PORT,
+        port: 8080,
         secret: "esunsecreto"
     },
     db: {
