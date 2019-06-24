@@ -1,15 +1,16 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
+
 var userSchema = mongoose.Schema({
     userId: {
         type: String,
         require: true,
-        unique: true,
-        validate: {
+        unique: true
+        /*validate: {
             validator: function(v) {
                 return /([0-4][0-9]|[5][0-2])\d{7}/.test(v);
             }
-        }
+        }*/
     },
     password: {
         type: String,
@@ -30,9 +31,11 @@ var userSchema = mongoose.Schema({
 });
 var User  = module.exports = mongoose.model('User', userSchema);
 module.exports.createUser = function(newUser, callback){
+    console.log("USUARIO",newUser);
     bcrypt.genSalt(10,function(err,salt){
         bcrypt.hash(newUser.password, salt , function(err, hash){
             newUser.password = hash;
+           
             // IBE SIGN -> TODO:
             newUser.save(callback);
         });

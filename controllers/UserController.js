@@ -13,10 +13,10 @@ exports.post_signup = function(req, res) {
       
         if (password == password2){
           let newUser = new User({
-            userId: req.id,
-            password: req.password,
-            answer: req.answer,
-            role: req.role
+            userId: req.body.id,
+            password: req.body.password,
+            answer: req.body.answer,
+            role: req.body.role
           });
           User.createUser(newUser, function(err, user){
             if(err) throw err;
