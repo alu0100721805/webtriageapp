@@ -4,7 +4,8 @@ const express = require('express'),
     bodyParser = require('body-parser'),
     cors = require('cors'),
     passport = require('passport'),
-    expressSession = require('express-session'),
+    session = require('express-session'),
+    MongoStore = require('connect-mongo')(session);
     config = require('./config/config'),
     app = express();
 
@@ -15,10 +16,11 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({ 'strict': true }));
 app.use('/static', express.static(__dirname + '/public'));
-app.use(expressSession(
+app.use(session(
   { secret: 'webtriagestart',
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
   }
 ));
 app.use(passport.initialize());
@@ -59,10 +61,20 @@ process.on('SIGINT', gracefulExit).on('SIGTERM', gracefulExit);
 //Eventos de conexión a la base de datos
 mongoose.connection.on('connected', function() {
   app.use('/', router);
+  app.use(function (req, res, next) {
+    var err = new Error('File Not Found');
+    err.status = 404;
+    next(err);
+  });
+  app.use(function (err, req, res, next) {
+    res.status(err.status || 500);
+    res.send(err.message);
+  });
+
     console.log('Conectado a ' + connectionString);
         app.listen(config.app.port, config.app.ip, function(err) {
           if (err) throw err;
-          console.log("Servidor escuchando en el puerto:" + config.app.port + " en la dirección:" + config.app.ip);
+          console.log("Server listen On:", config.app.ip + config.app.port );
 })});
 mongoose.connection.on('error', function(err) {
     console.log('Error de conexión: ' + err);

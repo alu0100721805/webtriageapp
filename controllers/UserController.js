@@ -18,7 +18,7 @@ exports.post_signup = function(req, res) {
             answer: req.body.answer,
             role: req.body.role
           });
-          User.createUser(newUser, function(err, user){
+          User.create(newUser, function(err, user){
             if(err) throw err;
             res.send(user).end();
           });
