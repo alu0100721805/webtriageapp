@@ -1,29 +1,29 @@
 extends mainlayout
 block header
-    link(rel="stylesheet" href="/static/css/signup.css")
+    link(rel='stylesheet' href='/static/css/signup.css')
 block content
-    div(class="container")
-        div(id="signup-row" class="row justify-content-center align-items-center")
-            div(id="signup-column" class="col-md-6")
-                div(class="box")
-                        p(id="titulo-signup" class="h4 mb-4 text-white") Registro WebTriageStartApp
+    div(class='container')
+        div(id='signup-row' class='row justify-content-center align-items-center')
+            div(id='signup-column' class='col-md-6')
+                div(class='box')
+                        p(id='titulo-signup' class='h4 mb-4 text-white') Registro WebTriageStartApp
                          form(method='POST' action='/signup')
-                            div(class="form-group" class="text-white")
-                                label(for="id" class="text-white") Número Colegiado:
-                                input(type="text" name="id" class="form-control" id="id"  placeholder="Identificación del Medico")
-                            div(class="form-group" class="text-white")
-                                label(for="answer" class="text-white") Respuesta Recuperación:
-                                input(type="text" name="answer" class="form-control" id="answer"  placeholder="Palabra de recuperación de cuenta")
-                            div(class="form-group" class="text-white")
-                                label(for="password" class="text-white") Contraseña: 
-                                input(type="password" name="password" class="form-control" id="password" placeholder="Contraseña")
-                            div(class="form-group" class="text-white")
-                                label(for="password2" class="text-white") Repetir Contraseña: 
-                                input(type="password" name="password2" class="form-control" id="password2" placeholder="Contraseña")
-                            div(class="form-group" class="text-white")
-                                label(for="role" class="text-white") Rol: 
-                                select(id="role" class="form-control")
-                                    option(value="user",selected = true) Usuario
-                                    option(value="admin") Administrador
-                            button(id="btn-signup" class="btn  btn-warning" type="submit") Registrar
+                            div(class='form-group' class='text-white')
+                                label(for='input-name' class='text-white') Número Colegiado:
+                                input(type='text' name='userId' class='form-control' id='input-name'  placeholder='Número de Colegiado')
+                            div(class='form-group' class='text-white')
+                                label(for='input-answer' class='text-white') Palabra de recuperación:
+                                input(type='text' name='answer' class='form-control' id='input-answer'  placeholder='Palabra de recuperación de cuenta')
+                            div(class='form-group' class='text-white')
+                                label(for='input-password' class='text-white') Contraseña: 
+                                input(type='password' name='password' class='form-control' id='input-password' placeholder='Contraseña')
+                            div(class='form-group' class='text-white')
+                                label(for='input-password2' class='text-white') Repetir Contraseña: 
+                                input(type='password' name='password2' class='form-control' id='input-password2' placeholder='Contraseña')
+                            div(class='form-group' class='text-white')
+                                label(for='select-role' class='text-white') Rol: 
+                                select(id='select-role' name='role' class='form-control')
+                                    option(value='user',selected = true) Usuario
+                                    option(value='admin') Administrador
+                            button(id='btn-signup' class='btn  btn-warning' type='submit') Registrar
                             
