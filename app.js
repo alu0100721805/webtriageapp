@@ -4,14 +4,13 @@ const express = require('express'),
     cors = require('cors'),
     passport = require('passport'),
     session = require('express-session'),
-    MongoStore = require('connect-mongo')(session),
     config = require('./config/config'),
     routerLogin = require('./router/loginRouter'),
     routerSignup = require('./router/signupRouter'),
     routerMap = require('./router/mapRouter'), 
     app = express();
+const  MongoStore = require('connect-mongo')(session);
 
-mongoose.promise = global.Promise;
 app.set('views', './views');
 app.set('view engine', 'pug');
 app.use(cors());
@@ -19,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({ 'strict': true }));
 app.use('/static', express.static(__dirname + '/public'));
 app.use(session(
-  { secret: 'webtriagestart',
+  { secret: 'secure webtriage',
     resave: true,
     saveUninitialized: true,
     store: new MongoStore({ mongooseConnection: mongoose.connection })
@@ -28,9 +27,6 @@ app.use(session(
 app.use(passport.initialize());
 app.use(passport.session());
 
-
-
-const isProduction = process.env.NODE_ENV === 'production';
   
 const connectionString = "mongodb://" + config.db.host + ":" + config.db.port + "/" + config.db.name;
 const  options = {
@@ -54,16 +50,15 @@ app.use('/signup',routerSignup);
 app.use('/login', routerLogin);
 app.use('/home',routerMap);
 
-
-// Si se mata el proceso se cierra la base de datos
 process.on('SIGINT', gracefulExit).on('SIGTERM', gracefulExit);
-//Eventos de conexión a la base de datos
+
 mongoose.connection.on('connected', async function() {
     console.log('Connecting to ' + connectionString);
     app.listen(config.app.port, config.app.ip, function(err) {
     if (err) throw err;
     console.log("Server listen On:", config.app.ip + config.app.port );
 })});
+
 mongoose.connection.on('error', function(err) {
     console.log('Database connection error: ' + err);
 });
@@ -72,7 +67,7 @@ mongoose.connection.on('disconnected', function() {
     console.log('The database has been disconnected');
 }, gracefulExit);
 
- // Conectar con Moongose
+ mongoose.Promise = global.Promise,
  mongoose.connect(connectionString, options);
 
 module.exports = app;
