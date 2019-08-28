@@ -1,12 +1,14 @@
 const express = require('express'),
-    errorHandler = require('errorhandler');
     mongoose = require('mongoose'),
     bodyParser = require('body-parser'),
     cors = require('cors'),
     passport = require('passport'),
     session = require('express-session'),
-    MongoStore = require('connect-mongo')(session);
+    MongoStore = require('connect-mongo')(session),
     config = require('./config/config'),
+    routerLogin = require('./router/loginRouter'),
+    routerSignup = require('./router/signupRouter'),
+    routerMap = require('./router/mapRouter'), 
     app = express();
 
 mongoose.promise = global.Promise;
@@ -27,14 +29,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-let router = require('./router/routes');
-
 
 const isProduction = process.env.NODE_ENV === 'production';
-
-if(!isProduction) {
-    app.use(errorHandler());
-  }
   
 const connectionString = "mongodb://" + config.db.host + ":" + config.db.port + "/" + config.db.name;
 const  options = {
@@ -49,43 +45,34 @@ const  options = {
  // Utilidades
  let gracefulExit = function() {
   mongoose.connection.close(function() {
-      console.log('Se cierra la conexión de la base de datos dado que se ha terminado el proceso');
+      console.log('The database process has closed unexpectedly');
       process.exit(0);
   });
 }
 
-// EVENTS 
+app.use('/signup',routerSignup);
+app.use('/login', routerLogin);
+app.use('/home',routerMap);
+
 
 // Si se mata el proceso se cierra la base de datos
 process.on('SIGINT', gracefulExit).on('SIGTERM', gracefulExit);
 //Eventos de conexión a la base de datos
-mongoose.connection.on('connected', function() {
-  app.use('/', router);
-  app.use(function (req, res, next) {
-    var err = new Error('File Not Found');
-    err.status = 404;
-    next(err);
-  });
-  app.use(function (err, req, res, next) {
-    res.status(err.status || 500);
-    res.send(err.message);
-  });
-
-    console.log('Conectado a ' + connectionString);
-        app.listen(config.app.port, config.app.ip, function(err) {
-          if (err) throw err;
-          console.log("Server listen On:", config.app.ip + config.app.port );
+mongoose.connection.on('connected', async function() {
+    console.log('Connecting to ' + connectionString);
+    app.listen(config.app.port, config.app.ip, function(err) {
+    if (err) throw err;
+    console.log("Server listen On:", config.app.ip + config.app.port );
 })});
 mongoose.connection.on('error', function(err) {
-    console.log('Error de conexión: ' + err);
+    console.log('Database connection error: ' + err);
 });
+
 mongoose.connection.on('disconnected', function() {
-    console.log('¡Se ha desconectado de la base de datos!');
+    console.log('The database has been disconnected');
 }, gracefulExit);
 
  // Conectar con Moongose
  mongoose.connect(connectionString, options);
-
-
 
 module.exports = app;

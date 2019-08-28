@@ -1,8 +1,11 @@
+.container{
+    margin: 2rem,auto;
+    width: 100%;
+}
 .box {
     width: 440px;
     margin-top: 10%;
 }
-
 .shape1 {
     position: relative;
     height: 170px;
@@ -105,8 +108,10 @@
      color: white; 
      font-weight: bolder;
  }
-#link-registrase {
-       margin-left: 5px;
-       font-weight: lighter;
+#link-registrarse  {
+       margin-left: 1rem;
        color: white;
+}
+#link-registrarse:hover {
+        text-decoration: underline;
 }
