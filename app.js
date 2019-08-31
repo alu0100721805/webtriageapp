@@ -38,7 +38,6 @@ const  options = {
         bufferMaxEntries: 0
 };
 
- // Utilidades
  let gracefulExit = function() {
   mongoose.connection.close(function() {
       console.log('The database process has closed unexpectedly');
