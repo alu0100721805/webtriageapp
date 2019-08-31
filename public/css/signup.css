@@ -1,6 +1,5 @@
 
 .box {
-    min-width: 440px;
     margin-top: 10%;
     padding: 1em;
     background-color: #4bff0178;
@@ -9,6 +8,7 @@
     justify-self: center;
     align-self: center;
     flex-direction: column;
+    max-width: 440px;
 }
 #titulo-signup {
     color: #007909;
