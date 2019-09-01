@@ -1,6 +1,5 @@
-var  UserService = require('../services/UserService');
-const { check, validationResult } = require('express-validator');
-const { sanitizeBody } = require('express-validator');
+const  UserService = require('../services/UserService');
+const { validationResult} = require('express-validator');
 
 exports.index_login = async function(req, res) {
     res.render('login');
@@ -8,18 +7,34 @@ exports.index_login = async function(req, res) {
 exports.index_signup = async  function(req, res) {
     res.render('signup');
 }
-exports.post_signup = async function(req, res) {
-
-        const password = req.body.password;
-        const password2 = req.body.password2;
-        if (password === password2){
-            try{
-              const createResult = await UserService.create(req.body);
-              res.render('signup',{data:createResult});
-            } catch (error) {
-              console.log("ERROR", error);
-              res.render('signup',{data:error});
-            }
+exports.post_signup = async function (req, res) {
+   
+    try{
+        const errors = validationResult(req);
+          if (!errors.isEmpty()) {
+            throw errors;
           }
-
+          try{
+            result = await UserService.create(req.body);
+          }catch (DbErrors){
+            console.log('ERROR', JSON.parse(JSON.stringify(DbErrors)));
+            let message = '';
+            if( DbErrors.name === 'ValidationError'){
+                if ( 'userId' in DbErrors.errors){
+                 message = DbErrors.errors.userId.message;
+                }
+            }
+            if(message !== ''){
+              res.render('signup', {errors: [{ msg: message}] });
+            } else {
+              res.render('signup', DbErrors);
+            }
+            
+          }  
+          
+        } catch (errors){
+          console.log(errors,JSON.parse(JSON.stringify(errors)));
+          res.render('signup', { errors: errors.array()});
+        }
+                  
 }

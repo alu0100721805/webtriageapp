@@ -11,7 +11,7 @@ var UserSchema = mongoose.Schema({
             validator: function(v) {
                 return /([0-4][0-9]|[5][0-2])\d{7}/.test(v);
             },
-            message: 'Is not a valid collegiate number!'
+            message: '¡No es un número de colegiado válido!'
         }
     },
     password: {
