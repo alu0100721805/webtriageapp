@@ -2,24 +2,14 @@ extends mainlayout
 block header
     link(rel='stylesheet' href='./static/css/login.css')
 block content
-    div(class='container')
-        div(id='login-row' class='row justify-content-center align-items-center')
-            div(id='login-column' class='col-md-6')
-                div(class='box')
-                    div(class='shape1')
-                    div(class='shape2')
-                    div(class='shape3')
-                    div(class='shape4')
-                    div(class='shape5')
-                    div(class='shape6')
-                    div(class='float')
-                        p(id='titulo-login' class='h4 mb-4 text-white') Acceso WebTriageStartApp
-                        form(class='form' method='POST' action='/login')
-                            div(class='form-group' class='text-white')
-                                label(for='input-name' class='text-white') Médico:
-                                input(type='text' name='userId' class='form-control' id='input-name'  placeholder='Número de Colegiado')
-                            div(class='form-group' class='text-white')
-                                label(for='password' class='text-white') Contraseña: 
-                                input(type='password' name='password' class='form-control' id='input-password' placeholder='Contraseña')
-                            button(id='btn-login' class='btn  btn-warning' type='submit') Acceder
-                            a(id='link-registrarse'  href='/signup') Registrarse
+    div(class='row justify-content-center height-90')
+        div(class='box')
+            p(id='titulo-login' class='h4 mb-4') Acceso a WebTriageStartApp
+            form(class='form' method='POST' action='/login')
+                div(class='form-group' class='text-white')
+                    input(type='text' name='userId' class='form-control' id='input-name'  placeholder='Número de Colegiado')
+                div(class='form-group' class='text-white')
+                    input(type='password' name='password' class='form-control' id='input-password' placeholder='Contraseña')
+                div(class='form-button-box')
+                    button(id='btn-login' class='btn  btn-warning' type='submit') Acceder
+                    a(id='link-registrarse' class='margin-left-1' href='/signup') Registrarse

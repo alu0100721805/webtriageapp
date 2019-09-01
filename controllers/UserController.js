@@ -60,7 +60,7 @@ exports.post_signup = async function (req, res) {
             throw errors;
           }
           result = await UserService.create(req.body);
-          //res.render('signup', {message:'¡Se ha creado el nuevo usuario!'});
+           res.redirect('login');
         } catch (errors){
           if('errors' in errors){
             res.render('signup', { errors: errors.array()});

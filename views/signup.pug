@@ -1,35 +1,27 @@
 extends mainlayout
 block header
     link(rel='stylesheet' href='/static/css/signup.css')
-    
 block content
-    div(class=' row justify-content-center height-90')
-            div(id='signup-column' class='col-md-6')
-                div(class='box')
-                        p(id='titulo-signup' class='h4 mb-4') Registro WebTriageStartApp
-                        form(method='POST' action='/signup')
-                            div(class='form-group text-white')
-                                label(for='input-name' class='text-white-label') Número Colegiado:
-                                input(type='text' name='userId' class='form-control input-text' id='input-name'  placeholder='Número de Colegiado')
-                            div(class='form-group text-white')
-                                label(for='input-name' class='text-white-label') Nombre:
-                                input(type='text' name='name' class='form-control input-text' id='name'  placeholder='Nombre')
-                            div(class='form-group text-white')
-                                label(for='input-name' class='text-white-label') Apellidos:
-                                input(type='text' name='surname' class='form-control input-text' id='surname'  placeholder='Apellidos')
-                            div(class='form-group text-white')
-                                label(for='input-answer' class='text-white-label') Palabra de recuperación:
-                                input(type='text' name='answer' class='form-control input-text' id='input-answer'  placeholder='Palabra de recuperación de cuenta')
-                            div(class='form-group text-white')
-                                label(for='input-password' class='text-white-label') Contraseña: 
-                                input(type='password' name='password' class='form-control input-text' id='input-password' placeholder='Contraseña')
-                            div(class='form-group text-white')
-                                label(for='input-confirm' class='text-white-label') Repetir Contraseña: 
-                                input(type='password' name='passwordConfirmation' class='form-control input-text' id='input-confirm' placeholder='Confirmar contraseña')
-                            button(id='btn-signup' class='btn  btn-warning' type='submit') Registrar
-                            if errors && errors.length > 0
-                                div(class='msg-box-error')
-                                    each val in errors
-                                        if val.msg !== ''
-                                            p(class='text-msg')=val.msg
-                                                   
+    div(class='row justify-content-center height-90')
+        div(class='box')
+                p(id='titulo-signup' class='h4 mb-4') Registro WebTriageStartApp
+                form(method='POST' action='/signup')
+                    div(class='form-group text-white')
+                        input(type='text' name='userId' class='form-control input-text' id='input-name'  placeholder='Número de Colegiado')
+                    div(class='form-group text-white')
+                        input(type='text' name='name' class='form-control input-text' id='name'  placeholder='Nombre')
+                    div(class='form-group text-white')
+                        input(type='text' name='surname' class='form-control input-text' id='surname'  placeholder='Apellidos')
+                    div(class='form-group text-white')
+                        input(type='text' name='answer' class='form-control input-text' id='input-answer'  placeholder='Palabra de recuperación de cuenta')
+                    div(class='form-group text-white')
+                        input(type='password' name='password' class='form-control input-text' id='input-password' placeholder='Contraseña')
+                    div(class='form-group text-white')
+                        input(type='password' name='passwordConfirmation' class='form-control input-text' id='input-confirm' placeholder='Confirmar contraseña')
+                    button(id='btn-signup' class='btn  btn-warning' type='submit') Registrar
+                    if errors && errors.length > 0
+                        div(class='msg-box-error')
+                            each val in errors
+                                if val.msg !== ''
+                                    p(class='text-msg')=val.msg
+                                        
