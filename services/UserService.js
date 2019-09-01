@@ -6,6 +6,8 @@ class UserService {
     static create(body) {
     const  newUser = new UserModel({
             userId: body.userId,
+            name: body.name,
+            surname: body.surname,
             password: body.password,
             answer: body.answer,
             role: body.role

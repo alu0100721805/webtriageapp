@@ -12,6 +12,12 @@ block content
                                 label(for='input-name' class='text-white-label') Número Colegiado:
                                 input(type='text' name='userId' class='form-control input-text' id='input-name'  placeholder='Número de Colegiado')
                             div(class='form-group text-white')
+                                label(for='input-name' class='text-white-label') Nombre:
+                                input(type='text' name='name' class='form-control input-text' id='name'  placeholder='Nombre')
+                            div(class='form-group text-white')
+                                label(for='input-name' class='text-white-label') Apellidos:
+                                input(type='text' name='surname' class='form-control input-text' id='surname'  placeholder='Apellidos')
+                            div(class='form-group text-white')
                                 label(for='input-answer' class='text-white-label') Palabra de recuperación:
                                 input(type='text' name='answer' class='form-control input-text' id='input-answer'  placeholder='Palabra de recuperación de cuenta')
                             div(class='form-group text-white')
@@ -22,7 +28,8 @@ block content
                                 input(type='password' name='passwordConfirmation' class='form-control input-text' id='input-confirm' placeholder='Confirmar contraseña')
                             button(id='btn-signup' class='btn  btn-warning' type='submit') Registrar
                             if errors && errors.length > 0
-                                div(class='msg-box')
+                                div(class='msg-box-error')
                                     each val in errors
                                         if val.msg !== ''
-                                            p(class='text-msg')=val.msg                
+                                            p(class='text-msg')=val.msg
+                                                   

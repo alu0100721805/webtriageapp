@@ -6,13 +6,15 @@ var UserSchema = mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-        trim: true,
-        validate: {
-            validator: function(v) {
-                return /([0-4][0-9]|[5][0-2])\d{7}/.test(v);
-            },
-            message: '¡No es un número de colegiado válido!'
-        }
+        trim: true
+    },
+    name: {
+      type: String,
+      required: true 
+    },
+    surname :{
+      type: String,
+      required: true 
     },
     password: {
         type: String,

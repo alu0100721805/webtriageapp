@@ -9,10 +9,9 @@
     align-self: start;
     flex-direction: column;
     max-width: 440px;
-    overflow: scroll;
-      
+    margin-bottom: 4rem; 
 }
-.msg-box {
+.msg-box-error {
     border-style: groove;
     border: 0.25rem;
     padding: 0.75rem;
@@ -24,6 +23,8 @@
     border-radius: 0.25rem;
     border-color: rgba(139, 0, 0, 0.479);
   }
+
+  
   
 #titulo-signup {
     color: #007909;
