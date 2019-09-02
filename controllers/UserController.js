@@ -59,13 +59,16 @@ exports.post_signup = async function (req, res) {
           if (!errors.isEmpty()) {
             throw errors;
           }
-          result = await UserService.create(req.body);
+          await UserService.create(req.body).catch(err => {
+            throw err;
+          });
            res.redirect('login');
-        } catch (errors){
-          if('errors' in errors){
-            res.render('signup', { errors: errors.array()});
+        } catch (err){
+          if('errors' in err){
+            console.log(err);
+            res.render('signup', { errors: err.errors});
           } else {
-            res.render('signup', errors);
+            res.render('signup', err);
           }
         }           
 }

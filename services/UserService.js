@@ -12,7 +12,14 @@ class UserService {
             answer: body.answer,
             role: body.role
     });
-    return newUser.save();
+     return UserModel.findOne({userId:body.userId})
+     .then(user => {
+        if(user){
+          throw {errors:[{msg:'¡El número de colegiado ya está en uso!'}]};    
+        }else {
+          return newUser().save();
+        }
+     })
   }
 }
 
