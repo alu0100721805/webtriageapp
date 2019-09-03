@@ -11,7 +11,8 @@ const dev = {
     app: {
         ip: "localhost",
         port: 3000,
-        secret: "esunsecreto"
+        TOKEN_SECRET: "BZwvzn9M8G9TAyS6CpRf5JAIgTclezg5",
+        TOKEN_EXP: 300
     },
     db: {
         host: 'localhost',
@@ -26,7 +27,7 @@ const prod = {
     app: {
         ip: process.env.IP,
         port: 8080,
-        secret: "esunsecreto"
+        TOKEN_SECRET: "dBKzg3yZDq4nyQyjBeqGbaBYjqdq7P8o"
     },
     db: {
         host: process.env.IP,

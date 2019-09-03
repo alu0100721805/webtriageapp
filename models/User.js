@@ -43,7 +43,6 @@ UserSchema.pre('save', function (next) {
           return next(err);
         }
         user.password = hash;
-        console.log(user);
         next();
       });
     });

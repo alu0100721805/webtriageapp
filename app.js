@@ -1,31 +1,23 @@
 const express = require('express'),
     mongoose = require('mongoose'),
     bodyParser = require('body-parser'),
+    cookieParser = require('cookie-parser'),
     cors = require('cors'),
-    passport = require('passport'),
-    session = require('express-session'),
     config = require('./config/config'),
     routerLogin = require('./router/loginRouter'),
     routerSignup = require('./router/signupRouter'),
     routerMap = require('./router/mapRouter'), 
     app = express();
-const  MongoStore = require('connect-mongo')(session);
+
 
 app.set('views', './views');
 app.set('view engine', 'pug');
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({ 'strict': true }));
+app.use(cookieParser());
 app.use('/static', express.static(__dirname + '/public'));
-app.use(session(
-  { secret: 'secure webtriage',
-    resave: true,
-    saveUninitialized: true,
-    store: new MongoStore({ mongooseConnection: mongoose.connection })
-  }
-));
-app.use(passport.initialize());
-app.use(passport.session());
+
 
   
 const connectionString = "mongodb://" + config.db.host + ":" + config.db.port + "/" + config.db.name;
@@ -47,7 +39,7 @@ const  options = {
 
 app.use('/signup',routerSignup);
 app.use('/login', routerLogin);
-app.use('/home',routerMap);
+app.use('/tag',routerMap);
 
 app.use((req, res, next) => {
   const error = new Error("Not found");

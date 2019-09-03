@@ -1,7 +1,12 @@
 const  UserService = require('../services/UserService');
-const { validationResult} = require('express-validator');
+const {validationResult} = require('express-validator');
 const {body} = require('express-validator');
 const {check} = require('express-validator');
+const jwt = require('jsonwebtoken');
+const config = require('../config/config');
+
+const jwtKey = config.app.TOKEN_SECRET;
+const jwtExpirySeconds = config.app.TOKEN_EXP;
 
 exports.validationSignUp =  function() {
   const valSignUp = [
@@ -45,6 +50,7 @@ exports.validationSignUp =  function() {
 }
 
 
+
 exports.index_login = async function(req, res) {
     res.render('login');
 }
@@ -71,4 +77,17 @@ exports.post_signup = async function (req, res) {
             res.render('signup', err);
           }
         }           
+}
+exports.post_signin = async function (req, res) {
+  const { userId, password } = req.body
+  if(!UserService.userValidation(userId,password)){
+    res.render('login',{ message:'Acceso inválido'});
+  }
+  const token = jwt.sign({ userId }, jwtKey, {
+    algorithm: 'HS256',
+    expiresIn: jwtExpirySeconds
+  })
+  console.log('token:', token);
+  res.cookie('token', token, { maxAge: jwtExpirySeconds * 1000 });
+  res.redirect('tag');
 }
