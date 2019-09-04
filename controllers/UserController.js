@@ -1,4 +1,5 @@
 const  UserService = require('../services/UserService');
+const UserModel = require('../models/User');
 const {validationResult} = require('express-validator');
 const {body} = require('express-validator');
 const {check} = require('express-validator');
@@ -65,9 +66,18 @@ exports.post_signup = async function (req, res) {
           if (!errors.isEmpty()) {
             throw errors;
           }
-          await UserService.create(req.body).catch(err => {
-            throw err;
-          });
+          const  newUser = new UserModel({
+            userId: req.body.userId,
+            name: req.body.name,
+            surname: req.body.surname,
+            password: req.body.password,
+            answer: req.body.answer,
+            role: req.body.role
+           });
+            const result =  UserService.create(newUser);
+            if(!result) {
+              throw {errors:[{msg:'¡No se ha podido crear el usuario!'}]};  
+            }
            res.redirect('login');
         } catch (err){
           if('errors' in err){
@@ -78,16 +88,20 @@ exports.post_signup = async function (req, res) {
           }
         }           
 }
-exports.post_signin = async function (req, res) {
-  const { userId, password } = req.body
-  if(!UserService.userValidation(userId,password)){
-    res.render('login',{ message:'Acceso inválido'});
-  }
-  const token = jwt.sign({ userId }, jwtKey, {
-    algorithm: 'HS256',
-    expiresIn: jwtExpirySeconds
-  })
-  console.log('token:', token);
-  res.cookie('token', token, { maxAge: jwtExpirySeconds * 1000 });
-  res.redirect('tag');
+exports.post_signin = function (req, res) {
+  try {
+    const { userId, password } = req.body;
+    UserService.userValidation(userId,password).then( isValid => {
+      console.log("ES VALIDO", isValid);
+        if(isValid === true){
+          res.redirect('tag');
+        }else {
+          res.render('login',{message:'Acceso denegado'});
+        }
+      })
+    }catch(err){
+        console.log(err);
+        res.render('login',err);
+    }       
+ 
 }

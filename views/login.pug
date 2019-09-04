@@ -13,3 +13,5 @@ block content
                 div(class='form-button-box')
                     button(id='btn-login' class='btn  btn-warning' type='submit') Acceder
                     a(id='link-registrarse' class='margin-left-1' href='/signup') Registrarse
+                    if message
+                        p=message

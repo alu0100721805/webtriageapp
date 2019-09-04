@@ -1,29 +1,32 @@
+
 const UserModel = require('../models/User');
-
-
 
 class UserService {
 
-    static create(body) {
-      const  newUser = new UserModel({
-              userId: body.userId,
-              name: body.name,
-              surname: body.surname,
-              password: body.password,
-              answer: body.answer,
-              role: body.role
-      });
-      return UserModel.findOne({userId:body.userId})
-      .then(user => {
-          if(user){
+    static async create(user) {
+      if(!user){
+        return undefined;
+      }
+      return UserModel.findOne({userId:user.userId}).exec()
+      .then( userFounded => {
+          if(userFounded){
             throw {errors:[{msg:'¡El número de colegiado ya está en uso!'}]};    
-          }else {
-            return newUser().save();
           }
-      })
+          return user.save();
+      }).catch(err => {
+        throw err;
+      });
     }
-    static  userValidation(userId, password){
-        
+    static async userValidation(id, passwd){
+     
+      return UserModel.findOne({userId: id}).exec().then(userFounded => {
+          if(!userFounded){
+            throw new Error(`No se ha encontrado el médico: ${ id }`);
+          }
+          return userFounded.comparePassword(passwd);
+         }).catch(err => {
+            throw err;
+         });
     }
    
 }
