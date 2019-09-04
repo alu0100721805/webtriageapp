@@ -17,8 +17,7 @@ var tagschema = new Schema({
   id: 
         {type: String,
         default: ""},
-  date: 
-        {type: Date,
+  date: {type: Date,
         default: Date.now }
 });
 

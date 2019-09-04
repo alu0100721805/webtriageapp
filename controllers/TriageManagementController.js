@@ -1,7 +1,7 @@
 var Tag = require("../models/Tag");
 
 exports.index_map_management = function(req, res) {
-    res.render('mapmanagement');
+    res.render('triageManagement');
 }
 
 exports.tag_create_post = async  function(req, res) {

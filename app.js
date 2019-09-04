@@ -4,9 +4,9 @@ const express = require('express'),
     cookieParser = require('cookie-parser'),
     cors = require('cors'),
     config = require('./config/config'),
-    routerLogin = require('./router/loginRouter'),
-    routerSignup = require('./router/signupRouter'),
-    routerMap = require('./router/mapRouter'), 
+    routerLogin = require('./router/LoginRouter'),
+    routerSignup = require('./router/SignupRouter'),
+    routerMap = require('./router/TriageManagementRouter'), 
     app = express();
 
 
@@ -39,7 +39,7 @@ const  options = {
 
 app.use('/signup',routerSignup);
 app.use('/login', routerLogin);
-app.use('/tag',routerMap);
+app.use('/triageManagement',routerMap);
 
 app.use((req, res, next) => {
   const error = new Error("Not found");

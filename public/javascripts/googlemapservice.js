@@ -111,7 +111,3 @@ function setMapOnAll(map) {
       markers.forEach((e) => limits.extend(e.position));
       map.fitBounds(limits);
 }
-function getCurrentPosition(){
-       
-    
-}

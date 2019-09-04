@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var tag_controller = require('../controllers/TagController');
+var tag_controller = require('../controllers/TriageManagementController');
 
 
 router.get('/tag/:id', tag_controller.tag_findById_get);

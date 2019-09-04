@@ -74,11 +74,18 @@ exports.post_signup = async function (req, res) {
             answer: req.body.answer,
             role: req.body.role
            });
-            const result =  UserService.create(newUser);
-            if(!result) {
-              throw {errors:[{msg:'¡No se ha podido crear el usuario!'}]};  
-            }
-           res.redirect('login');
+
+           await UserService.findUser(newUser.userId).then(async (dbUser) => {
+            if(dbUser) throw {errors:[{msg:'¡Usuario ya existente!'}]};
+      
+            await UserService.create(newUser).then(user => {
+              if(user) res.redirect('login');
+            })
+            .catch(err => {
+              throw err;
+            })
+          });
+           
         } catch (err){
           if('errors' in err){
             console.log(err);
@@ -88,18 +95,27 @@ exports.post_signup = async function (req, res) {
           }
         }           
 }
-exports.post_signin = function (req, res) {
+exports.post_signin = async function (req, res) {
   try {
     const { userId, password } = req.body;
-    UserService.userValidation(userId,password).then( isValid => {
-      console.log("ES VALIDO", isValid);
-        if(isValid === true){
-          res.redirect('tag');
-        }else {
-          res.render('login',{message:'Acceso denegado'});
-        }
-      })
-    }catch(err){
+
+    await UserService.findUser(userId).then(async (dbUser) => {
+      if(!dbUser) throw {errors:[{msg:'¡Usuario no existente!'}]};
+
+      await UserService.userValidation(dbUser, password).then( isValid => {
+        console.log("ES VALIDO", isValid);
+          if(isValid === true){
+            res.redirect('triageManagement');
+          }else {
+            res.render('login',{message:'Acceso denegado'});
+          }
+        })
+        .catch(err => {
+          throw err;
+        })
+    });
+    
+    } catch(err){
         console.log(err);
         res.render('login',err);
     }       

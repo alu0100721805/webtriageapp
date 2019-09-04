@@ -3,30 +3,27 @@ const UserModel = require('../models/User');
 
 class UserService {
 
-    static async create(user) {
-      if(!user){
-        return undefined;
-      }
-      return UserModel.findOne({userId:user.userId}).exec()
-      .then( userFounded => {
-          if(userFounded){
-            throw {errors:[{msg:'¡El número de colegiado ya está en uso!'}]};    
-          }
-          return user.save();
-      }).catch(err => {
-        throw err;
+    static async findUser(userId) {
+      return UserModel.findOne({userId}).exec()
+      .then(user => {
+        return user;
+      })
+      .catch(err => {
+        throw new Error(err);
       });
     }
-    static async userValidation(id, passwd){
-     
-      return UserModel.findOne({userId: id}).exec().then(userFounded => {
-          if(!userFounded){
-            throw new Error(`No se ha encontrado el médico: ${ id }`);
-          }
-          return userFounded.comparePassword(passwd);
-         }).catch(err => {
-            throw err;
-         });
+    static async create(user) {
+      if(!user){
+         throw {errors:[{msg:'¡No hay usuario válido!'}]};    
+      }
+      return user.save();
+    }
+
+    static async userValidation(user, passwd){
+      if(!user || !passwd) {
+        throw {errors:[{msg:'¡Faltan parámetros!'}]};    
+      }
+      return user.comparePassword(passwd);
     }
    
 }
