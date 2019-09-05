@@ -37,9 +37,8 @@ const  options = {
       process.exit(0);
   });
 }
-
-app.use('/signup',routerSignup);
 app.use('/login', routerLogin);
+app.use('/signup',routerSignup);
 app.use('/triageManagement',routerMap);
 app.use('/users', routerUsers);
 

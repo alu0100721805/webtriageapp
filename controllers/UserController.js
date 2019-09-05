@@ -116,7 +116,6 @@ exports.post_signin = async function (req, res) {
       if(!dbUser) throw {errors:[{msg:'¡Usuario no existente!'}]};
 
       await UserService.userValidation(dbUser, password).then( isValid => {
-        console.log("ES VALIDO", isValid);
           if(isValid === true){
             res.redirect('triageManagement');
           }else {
