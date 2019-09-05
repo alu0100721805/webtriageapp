@@ -7,7 +7,7 @@ const express = require('express'),
     routerLogin = require('./router/LoginRouter'),
     routerSignup = require('./router/SignupRouter'),
     routerMap = require('./router/TriageManagementRouter'), 
-    routerUsers = require('./router/UdiserRouter'), 
+    routerUsers = require('./router/UserRouter'), 
     app = express();
 
 
