@@ -1,0 +1,21 @@
+extends mainlayout
+block header
+block content
+    div(class="conatiner")
+        table(class="table")
+            thead
+                tr
+                    th="Num. de colegiado"
+                    th="Nombre"
+                    th="Apellidos"
+                    th="Actions"
+            tbody
+                if users && users.length > 0
+                    each user in users
+                        tr
+                            td=user.userId
+                            td=user.name
+                            td=user.surname
+                            td
+                                button(type="button" class="btn btn-outline-primary")
+                                    span(class="glyphicon glyphicon-pencil")

@@ -2,25 +2,31 @@ extends mainlayout
 block header
     link(rel='stylesheet' href='/static/css/triage-management.css')
 block content
-    div(class='content')
-        div(class='row')
-            div(class='col-md-3 custom-control custom-checkbox')
-                input(type='checkbox' class='custom-control-input' id='low-priority-input')
-                label(class='custom-control-label' for='low-priority-input')  Prioridad Baja
-            div(class='col-md-3 custom-control custom-checkbox')
-                input(type='checkbox' class='custom-control-input' id='medium-priority-input')
-                label(class='custom-control-label' for='medium-priority-input') Prioridad Media
-            div(class='col-md-3 custom-control custom-checkbox')
-                input(type='checkbox' class='custom-control-input' id='high-priority-input')
-                label(class='custom-control-label' for='high-priority-input') Prioridad Alta 
-        div(class='row')
-            div(class='col-md-3 custom-control custom-checkbox')
-                input(type='checkbox' class='custom-control-input' id='not-priority-input')
-                label(class='custom-control-label' for='not-priority-input') Sin Prioridad
-            div(class='col-md-3 custom-control custom-checkbox')
-                input(type='checkbox' class='custom-control-input' id='assisted-input')
-                label(class='custom-control-label' for='assisted-input') Asistidos
-            div(class='col-md-3 custom-control custom-checkbox')    
+    div(class='container')
+        div(class='triagebox')
+            p(id='titulo-signup' class='h4 mb-4') Gestión del Triage
+            div(class='row')
+                div(class='col-md-3 custom-control custom-checkbox no-gutters')
+                
+
+        div(class='prioritybox')
+            div(class='row')
+                div(class='col-md-2 custom-control custom-checkbox no-gutters')
+                    input(type='checkbox' class='custom-control-input' id='low-priority-input')
+                    label(class='custom-control-label' for='low-priority-input') Baja
+                div(class='col-md-2 custom-control custom-checkbox no-gutters')
+                    input(type='checkbox' class='custom-control-input' id='medium-priority-input')
+                    label(class='custom-control-label' for='medium-priority-input') Media
+                div(class='col-md-2 custom-control custom-checkbox no-gutters')
+                    input(type='checkbox' class='custom-control-input' id='high-priority-input')
+                    label(class='custom-control-label' for='high-priority-input') Alta 
+            div(class='row')
+                div(class='col-md-2 custom-control custom-checkbox no-gutters')
+                    input(type='checkbox' class='custom-control-input' id='not-priority-input')
+                    label(class='custom-control-label' for='not-priority-input') Sin Prioridad
+                div(class='col-md-2 custom-control custom-checkbox no-gutters')
+                    input(type='checkbox' class='custom-control-input' id='assisted-input')
+                    label(class='custom-control-label' for='assisted-input') Asistidos
         div(class='row actions-buttons')
             button(type='button' class='btn btn-info btn-sm' onclick='drawTags();') Mostrar Pacientes
         div(class='row')

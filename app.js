@@ -7,6 +7,7 @@ const express = require('express'),
     routerLogin = require('./router/LoginRouter'),
     routerSignup = require('./router/SignupRouter'),
     routerMap = require('./router/TriageManagementRouter'), 
+    routerUsers = require('./router/UserRouter'), 
     app = express();
 
 
@@ -40,6 +41,7 @@ const  options = {
 app.use('/signup',routerSignup);
 app.use('/login', routerLogin);
 app.use('/triageManagement',routerMap);
+app.use('/users', routerUsers);
 
 app.use((req, res, next) => {
   const error = new Error("Not found");

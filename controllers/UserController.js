@@ -59,6 +59,19 @@ exports.index_signup = async  function(req, res) {
     res.render('signup');
 }
 
+exports.index_users = async function (req, res) {
+  try {
+    await UserService.findAll().then(async (users) => {
+      if(users){
+        res.render('users', { users: users });
+      }
+    });
+    
+    } catch(err){
+      console.log(err)
+    }
+}
+
 exports.post_signup = async function (req, res) {
    
     try{
