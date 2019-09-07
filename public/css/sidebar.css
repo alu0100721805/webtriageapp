@@ -1,16 +1,35 @@
 .wrapper {
-  display: flex;
-  align-items: stretch;
+    display: flex;
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    width: 100%;
+    height: 100%;
+    flex-flow: row;
+}
+
+#content-block {
+    margin: 0 0;
+    padding: 0 0;
+    height: 100vh;
+    width: 100%;
 }
 
 #sidebar.active {
-  margin-left: -250px;
+  margin-left: -150px;
 }
 
 #sidebar {
-  min-width: 200px;
-  max-width: 200px;
-  min-height: 100vh;
+    min-width: 150px;
+    max-width: 150px;
+    background: rgba(75, 255, 1, 0.47);
+    color:white;
+    height: 100vh !important;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    transition: all 0.3s;
+    background-image: linear-gradient(to right, #009900,#006900,#003C00);
+    
 }
 
 a[data-toggle="collapse"] {
@@ -27,13 +46,14 @@ a[data-toggle="collapse"] {
 
 @media (max-width: 768px) {
   #sidebar {
-      margin-left: -250px;
+      margin-left: -200px;
   }
   #sidebar.active {
       margin-left: 0;
   }
 }
 
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
 body {
     font-family: 'Poppins', sans-serif;
@@ -50,26 +70,14 @@ p {
 
 a, a:hover, a:focus {
     color: inherit;
-    text-decoration: none;
+    text-decoration: underline;
     transition: all 0.3s;
 }
-
-#sidebar {
-    /* don't forget to add all the previously mentioned styles here too */
-    background: rgb(18, 131, 3);
-    color: #fff;
-    transition: all 0.3s;
-}
-
 #sidebar .sidebar-header {
-    padding: 20px;
-    background: rgb(18, 131, 3);
+    padding: 1rem;
+    background-image: linear-gradient(to right, #009900,#006900,#003C00);
 }
 
-#sidebar ul.components {
-    padding: 20px 0;
-    border-bottom: 1px solid #47748b;
-}
 
 #sidebar ul p {
     color: #fff;
@@ -81,17 +89,4 @@ a, a:hover, a:focus {
     font-size: 1.1em;
     display: block;
 }
-#sidebar ul li a:hover {
-    color: #7386D5;
-    background: #fff;
-}
 
-#sidebar ul li.active > a, a[aria-expanded="true"] {
-    color: #fff;
-    background: rgb(18, 131, 3);
-}
-ul ul a {
-    font-size: 0.9em !important;
-    padding-left: 30px !important;
-    background: rgb(18, 131, 3);
-}
