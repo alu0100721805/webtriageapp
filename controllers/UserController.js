@@ -2,12 +2,10 @@ const  UserService = require('../services/UserService');
 const UserModel = require('../models/User');
 const {validationResult} = require('express-validator');
 const {body} = require('express-validator');
-const {check} = require('express-validator');
-const jwt = require('jsonwebtoken');
-const config = require('../config/config');
 
-const jwtKey = config.app.TOKEN_SECRET;
-const jwtExpirySeconds = config.app.TOKEN_EXP;
+
+
+
 
 exports.validationSignUp =  function() {
   const valSignUp = [
@@ -39,7 +37,6 @@ exports.validationSignUp =  function() {
       if(regexp.test(value)) return true;
       else  throw new Error('¡El apellido no es válido!');
     }),
-    check('answer','¡La palabra de recuperación es necesaria!').not().isEmpty(),
     body('passwordConfirmation').custom((value, { req }) => {
         if (value !== req.body.password && value !== '' && req.body.password !== '') {
           throw new Error('¡La contraseña de confirmación no coincide con la contraseña!');
@@ -50,8 +47,6 @@ exports.validationSignUp =  function() {
     return valSignUp;
 }
 
-
-
 exports.index_login = async function(req, res) {
     res.render('login');
 }
@@ -61,12 +56,11 @@ exports.index_signup = async  function(req, res) {
 
 exports.index_users = async function (req, res) {
   try {
-    await UserService.findAll().then(async (users) => {
+    await UserService.findAllUser().then(async (users) => {
       if(users){
         res.render('users', { users: users });
       }
     });
-    
     } catch(err){
       console.log(err)
     }
@@ -84,7 +78,6 @@ exports.post_signup = async function (req, res) {
             name: req.body.name,
             surname: req.body.surname,
             password: req.body.password,
-            answer: req.body.answer,
             role: req.body.role
            });
 

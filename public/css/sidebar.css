@@ -6,6 +6,13 @@
     height: 100%;
     flex-flow: row;
 }
+.hide-button, .hide-button:active, .hide-button:focus {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.75rem;
+    background: #007e18;
+    border-color: #006c06 !important;
+}
 
 #content-block {
     margin: 0 0;

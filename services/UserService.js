@@ -2,7 +2,15 @@
 const UserModel = require('../models/User');
 
 class UserService {
-
+    static async findAllUser(){
+      return UserModel.find({}).exec()
+      .then( users => {
+        return users;
+      })
+      .catch(err => {
+          throw new Error(err);
+      });
+    }
     static async findUser(userId) {
       return UserModel.findOne({userId}).exec()
       .then(user => {

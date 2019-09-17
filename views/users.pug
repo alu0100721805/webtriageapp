@@ -1,21 +1,58 @@
 extends mainlayout
 block header
+    link(rel='stylesheet' href='/static/css/users.css')
+    script.
+        $(document).ready(function(){
+            // Activate tooltip
+            $('[data-toggle="tooltip"]').tooltip();
+            
+            // Select/Deselect checkboxes
+            var checkbox = $('table tbody input[type="checkbox"]');
+            $("#selectAll").click(function(){
+                if(this.checked){
+                    checkbox.each(function(){
+                        this.checked = true;                        
+                    });
+                } else{
+                    checkbox.each(function(){
+                        this.checked = false;                        
+                    });
+                } 
+            });
+            checkbox.click(function(){
+                if(!this.checked){
+                    $("#selectAll").prop("checked", false);
+                }
+            });
+        });
 block content
-    div(class="conatiner")
+    div(class="container-fluid")
+        div(class="table-wrapper")
+            div(class="table-title")
+                div(class="row" align="center")
+                    h2 Administrar 
+                        b Médicos
+                div(class="row no-gutters buttons-header")
+                    a(href="#addEmployeeModal" class="btn btn-success" data-toggle="modal")
+                        i(class="material-icons") &#xE147;
+                        span  Registrar 
+                    a(href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal")
+                        i(class="material-icons") &#xE15C;
+                        span  Eliminar  
         table(class="table")
-            thead
-                tr
-                    th="Num. de colegiado"
-                    th="Nombre"
-                    th="Apellidos"
-                    th="Actions"
-            tbody
-                if users && users.length > 0
-                    each user in users
-                        tr
-                            td=user.userId
-                            td=user.name
-                            td=user.surname
-                            td
-                                button(type="button" class="btn btn-outline-primary")
-                                    span(class="glyphicon glyphicon-pencil")
+                thead
+                    tr
+                        th="Num. de colegiado"
+                        th="Nombre"
+                        th="Apellidos"
+                        th="Actions"
+                tbody
+                    if users && users.length > 0
+                        each user in users
+                            tr
+                                td=user.userId
+                                td=user.name
+                                td=user.surname
+                                td
+                                    button(type="button" class="btn btn-outline-primary")
+                                        span(class="glyphicon glyphicon-pencil")
