@@ -1,24 +1,31 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var tagschema = new Schema({
-  id:  
-       {type: String, 
+    id: {
+        type: String,
         unique: true,
-        required: true},
-  colour: 
-       {type: String,
-        required:true},
-  lat: 
-        {type: Number,
-        required: true},
-  long: 
-        {type: Number,
-        required: true},
-  sign: 
-        {type: String,
-        default: ""},
-  date: {type: Date,
-        default: Date.now }
+        required: true
+    },
+    color: {
+        type: String,
+        required: true
+    },
+    lat: {
+        type: Number,
+        required: true
+    },
+    long: {
+        type: Number,
+        required: true
+    },
+    sign: {
+        type: String,
+        default: ""
+    },
+    date: {
+        type: Date,
+        default: Date.now
+    }
 });
 
-module.exports  = mongoose.model('Tag', tagschema);
+module.exports = mongoose.model('Tag', tagschema);
