@@ -19,7 +19,7 @@ const dev = {
         port: 27017,
         name: 'triagestartdb'
     },
-    uri: ''
+    uri: 'mongodb+srv://alu0100721805:<password>@triagestartdb-qbdtk.gcp.mongodb.net/test?retryWrites=true&w=majority'
 
 };
 
