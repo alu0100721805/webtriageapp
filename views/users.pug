@@ -23,21 +23,6 @@ block header
                 console.log("optionsToDel", optionsToDel);
                 console.log("ID",current.userId);
             });
-            $("#deleteForm").on("submit", function(ev){
-                console.log("ENTRA");
-                $.ajax({
-                url: '/users/delete',t
-                type : "POST", 
-                dataType : 'json', 
-                data : optionsToDel.serialize(), /
-                success : function(result) {
-                    console.log(result);
-                },
-                error: function(xhr, resp, text) {
-                    console.log(xhr, resp, text);
-                }
-                });
-            });
             // Select/Deselect checkboxes
             var checkbox = $('table tbody input[type="checkbox"]');
             $("#selectAll").click(function(){
