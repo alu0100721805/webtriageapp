@@ -14,7 +14,7 @@ var tagschema = new Schema({
   long: 
         {type: Number,
         required: true},
-  id: 
+  sign: 
         {type: String,
         default: ""},
   date: {type: Date,

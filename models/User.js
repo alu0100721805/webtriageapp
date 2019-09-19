@@ -24,6 +24,10 @@ var UserSchema = mongoose.Schema({
         type: String,
         enum: ['admin', 'user'],
         default: 'user'
+    },
+    registrationDate: {
+        type: Date,
+        default: Date.now
     }
 });
 
@@ -43,6 +47,21 @@ UserSchema.pre('save', function (next) {
       });
     });
 });
+UserSchema.methods.encryptPassword =  function(password) {
+  return new Promise((resolve, error) => {
+    bcrypt.genSalt(10,function(err,salt){
+      if( err){
+       error(err);
+      }
+      bcrypt.hash(password, salt, function (err, hash) {
+        if (err) {
+          error(err);
+        }
+        resolve(hash);
+      });
+    });
+  });
+};
 
 UserSchema.methods.comparePassword =  function(candidatePassword) {
   return new Promise((resolve, error) => {

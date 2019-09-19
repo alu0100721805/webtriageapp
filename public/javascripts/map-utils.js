@@ -1,6 +1,6 @@
 // Array bidimensional Orden Rojo,Amarillo,Verde,Negro,Azul
 
-var url =  'https://triageapp-alu0100721805.c9users.io';
+var url =  'http://localhost:3000';
 var webmap = null;
 var objresponse = null;
 var markers = [];
@@ -32,7 +32,7 @@ function drawTags(){
     var checkgreen = document.getElementById("low-priority-input");
     var checkblack = document.getElementById("not-priority-input");
     var checkblue = document.getElementById("assisted-input");
-    var urlcolor = url + "/tag/?color=";
+    var urlcolor = url + "/tag/?colour=";
     deleteMarkers();
     if (checkred.checked == true){
          httpGetSync(urlcolor + "Rojo",addMarkers);

@@ -1,14 +1,17 @@
+.container-fluid{
+    padding: 0;
+    margin-left: 1rem;
+}
 .box {
-    margin-top: 10%;
+    margin-top: 2rem;
     padding: 1em;
     background-color: #4bff0178;
     border-radius: 0.5rem;
     display: flex;
-    justify-self: center;
-    align-self: start;
     flex-direction: column;
-    max-width: 440px;
-    margin-bottom: 4rem; 
+    min-width: 200px;
+    max-width: 400px;
+    margin-bottom: 2rem; 
 }
 .msg-box-error {
     border-style: groove;

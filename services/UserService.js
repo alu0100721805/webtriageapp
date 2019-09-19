@@ -33,7 +33,24 @@ class UserService {
       }
       return user.comparePassword(passwd);
     }
-   
+    static async userEdit(user){
+      try{
+         let newpassword;
+         let isEqual = await user.comparePassword(user.password);
+         if(!isEqual){
+          newpassword = await user.encryptPassword(user.password);
+         }
+        const promise = UserModel.findOneAndUpdate({ userId: user.userId },{ $set: {
+          name:user.name,
+          surname: user.surname,
+          password: !isEqual? newpassword:user.password,
+          role: user.role
+        }}).exec();
+        return promise;
+      }catch ( err){
+        return err;
+      }
+    }
 }
 
 module.exports = UserService;

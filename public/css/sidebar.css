@@ -35,7 +35,7 @@
     left: 0;
     z-index: 999;
     transition: all 0.3s;
-    background-image: linear-gradient(to right, #009900,#006900,#003C00);
+    background-image: linear-gradient(to right, #009900,#006900,rgb(0, 65, 0));
     
 }
 
@@ -77,7 +77,7 @@ p {
 
 a, a:hover, a:focus {
     color: inherit;
-    text-decoration: underline;
+    text-decoration: none;
     transition: all 0.3s;
 }
 #sidebar .sidebar-header {
@@ -88,12 +88,21 @@ a, a:hover, a:focus {
 
 #sidebar ul p {
     color: #fff;
-    padding: 10px;
+    padding: 0.6rem;
 }
 
 #sidebar ul li a {
-    padding: 10px;
-    font-size: 1.1em;
-    display: block;
+    padding: 0.3rem;
+    font-size: 0.875rem;
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 0.5rem;
+}
+#sidebar ul li a:hover {
+    background:rgb(0, 48, 0);
+    opacity: 0.8;
+}
+li {
+    list-style-type:none;
 }
 

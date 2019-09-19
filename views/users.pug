@@ -3,9 +3,41 @@ block header
     link(rel='stylesheet' href='/static/css/users.css')
     script.
         $(document).ready(function(){
+            let optionsToDel= [];
             // Activate tooltip
             $('[data-toggle="tooltip"]').tooltip();
             
+            // Select EDIT send user data
+            $(document).on("click", ".edit", function () {
+                const currentUser = $(this).data('user');
+                $(".modal-body #user-id").val( currentUser.userId );
+                $(".modal-body #user-name").val( currentUser.name);
+                $(".modal-body #user-surname").val(currentUser.surname);
+                $(".modal-body #user-password").val(currentUser.password);
+                $(".model-body #user-role").val(currentUser.role);
+            });
+            $(document).on("click",".delete", function() {
+                let current = $(this).data('user');
+                optionsToDel = [];
+                optionsToDel.push(current.userId);
+                console.log("optionsToDel", optionsToDel);
+                console.log("ID",current.userId);
+            });
+            $("#deleteForm").on("submit", function(ev){
+                console.log("ENTRA");
+                $.ajax({
+                url: '/users/delete',t
+                type : "POST", 
+                dataType : 'json', 
+                data : optionsToDel.serialize(), /
+                success : function(result) {
+                    console.log(result);
+                },
+                error: function(xhr, resp, text) {
+                    console.log(xhr, resp, text);
+                }
+                });
+            });
             // Select/Deselect checkboxes
             var checkbox = $('table tbody input[type="checkbox"]');
             $("#selectAll").click(function(){
@@ -24,35 +56,85 @@ block header
                     $("#selectAll").prop("checked", false);
                 }
             });
+
         });
 block content
     div(class="container-fluid")
         div(class="table-wrapper")
             div(class="table-title")
-                div(class="row" align="center")
+                div(class="row title-div")
                     h2 Administrar 
                         b Médicos
                 div(class="row no-gutters buttons-header")
-                    a(href="#addEmployeeModal" class="btn btn-success" data-toggle="modal")
+                    a(href="#addUserModal" class="btn btn-success" data-toggle="modal")
                         i(class="material-icons") &#xE147;
                         span  Registrar 
-                    a(href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal")
+                    a(href="#deleteUserModal" class="btn btn-danger" data-toggle="modal")
                         i(class="material-icons") &#xE15C;
                         span  Eliminar  
-        table(class="table")
+            table(class="table table table-striped table-hover")
                 thead
                     tr
-                        th="Num. de colegiado"
+                        th 
+                            span(class="custom-checkbox")
+                                input(type="checkbox" id="selectAll")
+                                label(for="selectAll")
+                        th="Colegiado"
                         th="Nombre"
                         th="Apellidos"
+                        th="Rol"
                         th="Actions"
                 tbody
                     if users && users.length > 0
-                        each user in users
+                        each user, index in users
                             tr
+                                td
+                                    span(class="custom-checkbox")
+                                        input(type='checkbox' id="check-"+ index )
+                                        label(for="checkbox-"+ index value=user.userId)
                                 td=user.userId
                                 td=user.name
                                 td=user.surname
+                                td=user.role
                                 td
-                                    button(type="button" class="btn btn-outline-primary")
-                                        span(class="glyphicon glyphicon-pencil")
+                                    a(href="#editUserModal" class="edit" data-toggle="modal" data-user=user)
+                                        i(class="material-icons"  data-toggle="tooltip" title="Edit") &#xE254;
+                                    a(href="#deleteUserModal" class="delete" data-toggle="modal" data-user=user)
+                                        i(class="material-icons" data-toggle="tooltip" title="Delete") &#xE872;
+    div(id="editUserModal" class="modal fade")
+        div(class="modal-dialog")
+            div(class="modal-content")
+                form(method="POST" action="/users/edit")
+                    div(class="modal-header")
+                        h4(class="modal-title") Editar Médico
+                        button(type="button" class="close" data-dismiss="modal" aria-hidden="true") &times;
+                    div(class="modal-body")
+                        div(class='form-group')
+                            label Nº Colegiado
+                            input(type='text' name='userId' class='form-control input-text' id='user-id'  placeholder='Número de Colegiado')
+                        div(class='form-group')
+                            label Nombre
+                            input(type='text' name='name' class='form-control input-text' id='user-name'  placeholder='Nombre')
+                        div(class='form-group')
+                            label Apellidos
+                            input(type='text' name='surname' class='form-control input-text' id='user-surname'  placeholder='Apellidos')
+                        div(class='form-group')
+                            label Contraseña
+                            input(type='password' name='password' class='form-control input-text' id='user-password' placeholder='Contraseña')
+                    div(class="modal-footer")
+                        input(type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar")
+                        input(type="submit" class="btn btn-success" value="Guardar")
+    div(id="deleteUserModal" class="modal fade")
+        div( class="modal-dialog")
+            div( class="modal-content")
+                form(id="deleteForm" method="POST" action="users/delete" )
+                    div( class="modal-header")
+                        h4(class="modal-title") Borrar Médico
+                        button(type="button" class="close" data-dismiss="modal" aria-hidden="true") &times;
+                    div( class="modal-body")
+                        p ¿Estás seguro de querer eliminar estos médicos?
+                        p(class="text-warning") 
+                            small Esta acción no puede ser revertida.
+                    div( class="modal-footer")
+                        input(type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar")
+                        input(type="submit"   class="btn btn-danger" value="Eliminar")

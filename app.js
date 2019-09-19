@@ -37,10 +37,11 @@ const  options = {
       process.exit(0);
   });
 }
-app.use('/login', routerLogin);
+app.use('/', routerLogin);
 app.use('/signup',routerSignup);
 app.use('/triageManagement',routerMap);
 app.use('/users', routerUsers);
+
 
 app.use((req, res, next) => {
   const error = new Error("Not found");

@@ -3,27 +3,41 @@ body {
     font-size:  0.75rem;
     color: #435d7d;
 }
+.form-group {
+    margin: 0 0 1rem 0;
+    
+}
+.form-control{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.75rem;
+    color: lightslategray;
+}
+
 .table-wrapper {
     margin-top: 2rem;
     border-radius: 16px;
     box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+.title-div {
+    display: flex;
+    justify-content: center;
+    
 }
 .table-title {        
     background:#007e18;  
     background: -webkit-linear-gradient(to right,#006c06, #007e18);  
     background: linear-gradient(to right,  #006c06, #007e18); 
     color: #fff;
-    padding: 16px 30px;
     border-radius: 16px;
+    padding: 1rem;
 }
 .table-title h2{
-    margin: 5px 0 0;
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 .buttons-header {
     margin-top: 1rem;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
 }
 
 .table-title .btn-group {
@@ -176,8 +190,8 @@ table.table .avatar {
     transform: rotateZ(45deg);
 }
 .custom-checkbox input[type="checkbox"]:checked + label:before {
-    border-color: #03A9F4;
-    background: #03A9F4;
+    border-color: #007e18;
+    background: #015f13;
 }
 .custom-checkbox input[type="checkbox"]:checked + label:after {
     border-color: #fff;
