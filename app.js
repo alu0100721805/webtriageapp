@@ -77,7 +77,9 @@ mongoose.connection.on('disconnected', function() {
 }, gracefulExit);
 
 mongoose.Promise = global.Promise,
-    mongoose.connect(connectionString, options);
+    //mongoose.connect(connectionString, options);
+    mongoose.connect(connectionString, { useNewUrlParser: true });
+mongoose.createConnection(connectionString, { useNewUrlParser: true });
 app.listen(app.get('port'), () => {
     console.log(`Server listen on PORT : ${app.get('port')}`);
 });
