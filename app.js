@@ -21,7 +21,11 @@ app.use('/static', express.static(__dirname + '/public'));
 
 
 
-const connectionString = "mongodb://" + config.db.host + ":" + config.db.port + "/" + config.db.name;
+let connectionString = "mongodb://" + config.db.host + ":" + config.db.port + "/" + config.db.name;
+
+if (config.uri != '') {
+    connectionString = config.uri;
+}
 const options = {
     useMongoClient: true,
     autoIndex: false,

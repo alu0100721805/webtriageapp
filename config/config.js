@@ -18,7 +18,8 @@ const dev = {
         host: 'localhost',
         port: 27017,
         name: 'triagestartdb'
-    }
+    },
+    uri: ''
 
 };
 
@@ -33,7 +34,8 @@ const prod = {
         host: process.env.IP,
         port: 27017,
         name: 'triagestartdb'
-    }
+    },
+    uri: ''
 };
 
 if (env == "production") {
@@ -41,4 +43,5 @@ if (env == "production") {
 } else {
     config = dev;
 }
+
 module.exports = config;
