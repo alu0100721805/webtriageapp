@@ -1,49 +1,72 @@
-#google-map{
+#google-map {
     height: 300px;
     min-width: 300px;
     width: 100%;
     margin: 0 auto;
 }
 
-.btn-group-vertical{
+.tittlebox {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.triagebox {
+    margin-top: 2rem;
+    padding: 1em;
+    background-color: #4bff0178;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    min-width: 200px;
+    max-width: 400px;
+    margin-bottom: 2rem;
+}
+
+.btn-group-vertical {
     margin-top: 38px;
     float: right;
     padding-right: 20px;
-    
 }
 
 .btn-group-vertical .custom-control-label {
-  color: #2c2b2c;
-  font-size: 10px;
-  line-height: 2.7;
-  padding-left: 1%;
-  font-style: italic;
-  font-family: serif;
-  font-style: oblique;
-}
-.btn-group-vertical .custom-control-label::after,
-.btn-group-vertical .custom-control-label::before {
-  height: 15px;
-  width: 15px;
-}
-.btn-group-vertical .custom-control-label::before {
-  background-color: #fff;
-  border: 1px solid #2c2b2c;
-  border-radius: 50%;
+    color: #2c2b2c;
+    font-size: 10px;
+    line-height: 2.7;
+    padding-left: 1%;
+    font-style: italic;
+    font-family: serif;
+    font-style: oblique;
 }
 
-.custom-control-input:checked ~ .custom-control-label[for="high-priority-input"]::before {
-  background-color: red !important;
+.btn-group-vertical .custom-control-label::after,
+.btn-group-vertical .custom-control-label::before {
+    height: 15px;
+    width: 15px;
 }
-.custom-control-input:checked ~ .custom-control-label[for="low-priority-input"]::before {
-  background-color: green !important;
+
+.btn-group-vertical .custom-control-label::before {
+    background-color: #fff;
+    border: 1px solid #2c2b2c;
+    border-radius: 50%;
 }
-.custom-control-input:checked ~ .custom-control-label[for="medium-priority-input"]::before {
-  background-color: yellow !important;
+
+.custom-control-input:checked~.custom-control-label[for="high-priority-input"]::before {
+    background-color: red !important;
 }
-.custom-control-input:checked ~ .custom-control-label[for="assisted-input"]::before {
-  background-color: blue !important;
+
+.custom-control-input:checked~.custom-control-label[for="low-priority-input"]::before {
+    background-color: green !important;
 }
-.custom-control-input:checked ~ .custom-control-label[for="not-priority-input"]::before {
-  background-color: black !important;
+
+.custom-control-input:checked~.custom-control-label[for="medium-priority-input"]::before {
+    background-color: yellow !important;
+}
+
+.custom-control-input:checked~.custom-control-label[for="assisted-input"]::before {
+    background-color: blue !important;
+}
+
+.custom-control-input:checked~.custom-control-label[for="not-priority-input"]::before {
+    background-color: black !important;
 }

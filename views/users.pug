@@ -54,16 +54,9 @@ block content
                     a(href="#addUserModal" class="btn btn-success" data-toggle="modal")
                         i(class="material-icons") &#xE147;
                         span  Registrar 
-                    a(href="#deleteUserModal" class="btn btn-danger" data-toggle="modal")
-                        i(class="material-icons") &#xE15C;
-                        span  Eliminar  
             table(class="table table table-striped table-hover")
                 thead
                     tr
-                        th 
-                            span(class="custom-checkbox")
-                                input(type="checkbox" id="selectAll")
-                                label(for="selectAll")
                         th="Colegiado"
                         th="Nombre"
                         th="Apellidos"
@@ -73,10 +66,6 @@ block content
                     if users && users.length > 0
                         each user, index in users
                             tr
-                                td
-                                    span(class="custom-checkbox")
-                                        input(type='checkbox' id="check-"+ index )
-                                        label(for="checkbox-"+ index value=user.userId)
                                 td=user.userId
                                 td=user.name
                                 td=user.surname
