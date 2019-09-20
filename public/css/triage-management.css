@@ -1,14 +1,28 @@
 #google-map {
     height: 300px;
-    min-width: 300px;
-    width: 100%;
+    width: 300px;
     margin: 0 auto;
+    padding: 1rem;
 }
 
 .tittlebox {
     display: flex;
     justify-content: center;
     align-content: center;
+}
+
+.actions-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.actions-buttons .btn-info {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.75rem;
+    background: #007e18;
+    border-color: #006c06;
 }
 
 .triagebox {

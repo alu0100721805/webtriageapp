@@ -1,3 +1,10 @@
+.icon-header {
+    height: 24px !important;
+    width: 24px !important;
+    background-image: url("/images/top_nav_logo_title.png");
+    z-index: 4000;
+}
+
 .wrapper {
     display: flex;
     margin: 0px 0px 0px 0px;
@@ -6,7 +13,10 @@
     height: 100%;
     flex-flow: row;
 }
-.hide-button, .hide-button:active, .hide-button:focus {
+
+.hide-button,
+.hide-button:active,
+.hide-button:focus {
     color: white;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 0.75rem;
@@ -22,46 +32,44 @@
 }
 
 #sidebar.active {
-  margin-left: -150px;
+    margin-left: -150px;
 }
 
 #sidebar {
     min-width: 150px;
     max-width: 150px;
     background: rgba(75, 255, 1, 0.47);
-    color:white;
+    color: white;
     height: 100vh !important;
     top: 0;
     left: 0;
     z-index: 999;
     transition: all 0.3s;
-    background-image: linear-gradient(to right, #009900,#006900,rgb(0, 65, 0));
-    
+    background-image: linear-gradient(to right, #009900, #006900, rgb(0, 65, 0));
 }
 
 a[data-toggle="collapse"] {
-  position: relative;
+    position: relative;
 }
 
 .dropdown-toggle::after {
-  display: block;
-  position: absolute;
-  top: 50%;
-  right: 20px;
-  transform: translateY(-50%);
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
 }
 
 @media (max-width: 768px) {
-  #sidebar {
-      margin-left: -200px;
-  }
-  #sidebar.active {
-      margin-left: 0;
-  }
+    #sidebar {
+        margin-left: -200px;
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
 }
 
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
-
 body {
     font-family: 'Poppins', sans-serif;
     background: #fafafa;
@@ -75,16 +83,18 @@ p {
     color: #999;
 }
 
-a, a:hover, a:focus {
+a,
+a:hover,
+a:focus {
     color: inherit;
     text-decoration: none;
     transition: all 0.3s;
 }
+
 #sidebar .sidebar-header {
     padding: 1rem;
-    background-image: linear-gradient(to right, #009900,#006900,#003C00);
+    background-image: linear-gradient(to right, #009900, #006900, #003C00);
 }
-
 
 #sidebar ul p {
     color: #fff;
@@ -98,11 +108,12 @@ a, a:hover, a:focus {
     justify-content: flex-start;
     margin-left: 0.5rem;
 }
+
 #sidebar ul li a:hover {
-    background:rgb(0, 48, 0);
+    background: rgb(0, 48, 0);
     opacity: 0.8;
 }
-li {
-    list-style-type:none;
-}
 
+li {
+    list-style-type: none;
+}

@@ -6,7 +6,7 @@ block content
         div(class='triagebox')
             div(class='row tittlebox')
                 p(id='titulo-signup' class='h4 mb-4') Gestión del Triage
-            div(class='row prioritybox')
+            div(class='prioritybox')
                 div(class='col-md-3 custom-control custom-checkbox no-gutters')
                     input(type='checkbox' class='custom-control-input' id='low-priority-input')
                     label(class='custom-control-label' for='low-priority-input') Baja
@@ -16,10 +16,9 @@ block content
                 div(class='col-md-3 custom-control custom-checkbox no-gutters')
                     input(type='checkbox' class='custom-control-input' id='high-priority-input')
                     label(class='custom-control-label' for='high-priority-input') Alta 
+            div#google-map
             div(class='row actions-buttons')
                 button(type='button' class='btn btn-info btn-sm' onclick='drawTags();') Mostrar Pacientes
-            div(class='row')
-                div#google-map
 block footer
     script( async defer src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDEPheuW-4HXMimL5Ti-AOKsM5coLaKJCg&callback=initialMap')
     script(src='/static/javascripts/map-utils.js')
