@@ -4,7 +4,7 @@ exports.index_map_management = function(req, res) {
     res.render('triageManagement');
 }
 
-exports.tag_create_post = async  function(req, res) {
+exports.tag_create_post = async function(req, res) {
     let objTag = new Tag(req.body);
     objTag.save(
         function(err) {
@@ -17,7 +17,7 @@ exports.tag_create_post = async  function(req, res) {
         });
 }
 exports.tag_findById_post = async function(req, res) {
-    let id = req.body.id;
+    const id = req.body.id;
     if (req.body.id) {
         Tag.findOne({ 'id': id }, function(err, obj) {
             if (err) {
@@ -32,7 +32,7 @@ exports.tag_findById_post = async function(req, res) {
 
 }
 exports.tag_findById_get = async function(req, res, next) {
-    let id = req.query.id;
+    const id = req.query.id;
     if (req.query.id) {
         Tag.findOne({ 'id': id }, function(err, obj) {
             if (err) {
@@ -44,10 +44,10 @@ exports.tag_findById_get = async function(req, res, next) {
     } else next();
 
 }
-exports.tag_findByColour_get = async  function(req, res, next) {
-    let colour = req.query.color;
-    if (colour) {
-        Tag.find({ "color": colour }, function(err, objs) {
+exports.tag_findByColour_get = async function(req, res, next) {
+    const col = req.query.color;
+    if (col) {
+        Tag.find({ "color": col }, function(err, objs) {
             if (err) {
                 res.status(500).send(err);
             } else {
@@ -57,4 +57,3 @@ exports.tag_findByColour_get = async  function(req, res, next) {
     } else next();
 
 }
-

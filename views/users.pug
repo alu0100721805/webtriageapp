@@ -16,14 +16,12 @@ block header
                 $(".modal-body #user-password").val(currentUser.password);
                 $(".model-body #user-role").val(currentUser.role);
             });
-            $(document).on("click",".delete", function() {
-                let current = $(this).data('user');
-                optionsToDel = [];
-                optionsToDel.push(current.userId);
-                console.log("optionsToDel", optionsToDel);
-                console.log("ID",current.userId);
+              $(document).on("click", ".delete", function () {
+                const currentUser = $(this).data('user');
+                $(".modal-body #user-to-del").val( currentUser.userId );
             });
-            // Select/Deselect checkboxes
+      
+      
             var checkbox = $('table tbody input[type="checkbox"]');
             $("#selectAll").click(function(){
                 if(this.checked){
@@ -51,7 +49,7 @@ block content
                     h2 Administrar 
                         b Médicos
                 div(class="row no-gutters buttons-header")
-                    a(href="#addUserModal" class="btn btn-success" data-toggle="modal")
+                    a(href="/signup" class="btn btn-success" data-toggle="modal")
                         i(class="material-icons") &#xE147;
                         span  Registrar 
             table(class="table table table-striped table-hover")
@@ -101,12 +99,15 @@ block content
     div(id="deleteUserModal" class="modal fade")
         div( class="modal-dialog")
             div( class="modal-content")
-                form(id="deleteForm" method="POST" action="users/delete" )
+                form(id="deleteForm" method="POST" action="/users/delete")
                     div( class="modal-header")
                         h4(class="modal-title") Borrar Médico
                         button(type="button" class="close" data-dismiss="modal" aria-hidden="true") &times;
                     div( class="modal-body")
-                        p ¿Estás seguro de querer eliminar estos médicos?
+                        p ¿Estás seguro de querer eliminar este medico?
+                        p Médico : 
+                            input(id="user-to-del" class='form-control input-text' type="text" name="userId" readonly)
+                            br
                         p(class="text-warning") 
                             small Esta acción no puede ser revertida.
                     div( class="modal-footer")

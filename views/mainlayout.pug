@@ -3,7 +3,6 @@ html
     title=title
     meta(http-equiv='Content-Type',content='text/html; charset=UTF-8')
     meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
-    script(src='/static/javascripts/map-utils.js')
     script(defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous")
     script(defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous")
     script(src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous")
@@ -18,4 +17,4 @@ html
   body
     include sidebar
   footer
-    script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDEPheuW-4HXMimL5Ti-AOKsM5coLaKJCg&callback=initialMap' async defer)
+    block footer

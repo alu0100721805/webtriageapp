@@ -20,3 +20,6 @@ block content
                 button(type='button' class='btn btn-info btn-sm' onclick='drawTags();') Mostrar Pacientes
             div(class='row')
                 div#google-map
+block footer
+    script( async defer src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDEPheuW-4HXMimL5Ti-AOKsM5coLaKJCg&callback=initialMap')
+    script(src='/static/javascripts/map-utils.js')
